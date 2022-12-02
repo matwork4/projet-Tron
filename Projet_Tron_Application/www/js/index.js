@@ -20,15 +20,16 @@
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 
-    // Cordova is now initialized. Have fun!
-    const ws = new WebSocket('ws://127.0.1:9898/');
+// Cordova is now initialized. Have fun!
 
-    ws.onopen = function() {
-        console.log("Le client s'est connecté");
-    };
-    ws.onmessage = function(e) {
-        console.log("J'ai reçu la réponse du serveur : " + e.data);
-    };
+const ws = new WebSocket('ws://127.0.1:9898/');
+
+ws.onopen = function() {
+    console.log("Le client s'est connecté");
+};
+ws.onmessage = function(e) {
+    console.log("J'ai reçu la réponse du serveur : " + e.data);
+};
 
 
 
