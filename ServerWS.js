@@ -1,3 +1,19 @@
+//MONGOOSE
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/TronDB')  
+// on peut accéder aux données de la collection users grace au model User:
+const User = require('./data/user')
+// pareil pour Game:
+const Game = require('./data/game');
+
+//Test d'accès aux données (il faut avoir seed d'abord cf README)
+run()
+async function run(){    
+    bibi = await User.findOne({username : "bibi"})
+    console.log(bibi)
+}
+
+//SERVEUR
 const http = require('http');
 const server = http.createServer();
 server.listen(9898); // On écoute sur le port 9898
@@ -20,4 +36,3 @@ wsServer.on('request', function(request) {
         connection.send("Le client a quitté")
     });
 });
-console.log("test");
