@@ -38,14 +38,27 @@
     </head>
     <body>
         <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
+            <!-- Ce qui était créé automatiquement par cordova -->
+            <!-- <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <div>
                     <h1><button onclick="envoyer()"></button></h1>
                 </div>
                 <p class="event received">Device is Ready</p>
+            </div> -->
+
+            <!-- Page de connexion -->
+            <div id="connectionView">
+                <form>
+                    <label>Username:</label>
+                    <input type="text" name="username" id="usernameInput">
+                    <label>Password:</label>
+                    <input type="text" name="password" id="passwordInput">
+
+                    <input type="button" value="Login" id="loginButton"/>
+                </form>
             </div>
+
         </div>
         <script src="js/index.js"></script>
     </body>

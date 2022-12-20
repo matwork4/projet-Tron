@@ -27,13 +27,32 @@ const ws = new WebSocket('ws://127.0.1:9898/');
 ws.onopen = function() {
     console.log("Le client s'est connecté");
 };
+
+// MESSAGE DU SERVEUR
 ws.onmessage = function(e) {
-    console.log("J'ai reçu la réponse du serveur : " + e.data);
+    let serverMessage = JSON.parse(e.data);
+    switch (serverMessage.type){
+        case "login" :
+            console.log(serverMessage.feedback);
+            break;
+    }
 };
 
-
-
-
+// Test d'envoi au serveur
 function envoyer(){
     ws.send('test ???');
+}
+
+//Event Listener pour se login
+const loginButton = document.getElementById('loginButton');
+const username = document.getElementById('usernameInput');
+const password = document.getElementById('passwordInput');
+loginButton.addEventListener('click', logSubmit);
+function logSubmit(event) {
+    let message ={
+        type : 'login',
+        username : username.value,
+        password : password.value
+    }
+    ws.send(JSON.stringify(message));
 }

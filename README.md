@@ -1,10 +1,26 @@
-# projet-Tron
-Projet de jeu Tron en utilisant Cordova
+# Projet de jeu Tron en utilisant Cordova
 
-# CREATION BASE DE DONNEES :
-# Les commandes sont supposées etre lancées depuis le dossier projet-Tron et avec Launchcordova lancé
+# TOUTES LES COMMANDES DOIVENT ETRE LANCEES AVEC  :
+# - launchcordova lancé
+# - depuis le dossier projet-Tron 
+
+
+#### CREATION BASE DE DONNEES ###
 mkdir data\db
 # mongo daemon à lancer depuis un terminal dédié :
 mongod --dbpath data\db
-# depuis le premier terminal:
+# Pour seeder, il faut lancer depuis un terminal dédié:
 node data\seed.js  
+# (Pour regarder les bases de données depuis le client mongo, il faut faire : use TronDB (puis db.users.find() etc.))
+# ###############################
+
+### LANCER LE JEU ###
+# Lancer le serveur depuis un terminal dédié : 
+node Serveur\ServerWS.js
+# Lancer le jeu dans firefox depuis un terminal dédié :
+cd Projet_Tron_Application
+cordova run browser --target=firefox
+# Lancer le jeu dans chrome depuis un terminal dédié :
+cd Projet_Tron_Application
+cordova run browser --target=chrome
+# #########################################
