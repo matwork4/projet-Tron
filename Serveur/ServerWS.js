@@ -1,11 +1,12 @@
-const queue = require('./authentication')
-/**********  MONGOOSE ******************************/
+const authentication = require('./authentication')
+const lobby = require('./lobby')
+/********************  MONGOOSE *********************/
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/TronDB')  
 // on peut accéder aux données de la collection users grace au model User:
-const User = require('../data/user')
+const User = require('../data/models/user')
 // pareil pour Game:
-const Game = require('../data/game');
+const Game = require('../data/models/game');
 //Test d'accès aux données (il faut avoir seed d'abord, cf README)
 // run()
 // async function run(){    
@@ -30,7 +31,7 @@ console.log("serveur lancé")
 wsServer.on('request', function(request) {
     const connection = request.accept(null, request.origin);
     // Ecrire ici le code qui indique ce que l'on fait :
-    // en cas de réception de message 
+    // -en cas de réception de message 
     connection.on('message', function(clientMessage) {
         // récuperation du message du client sous forme d'object
         let clientMessageData = JSON.parse(clientMessage.utf8Data);
@@ -45,10 +46,15 @@ wsServer.on('request', function(request) {
                     connection.send(response)
                 });
                 break;
+            
+            // DEMANDE POUR REJOINDRE UN LOBBY
+            case 'joinLobby' :
+                lobby.handle(connection)
+                break
         }
     });
 
-    // en cas de fermeture de la WebSocket
+    // -en cas de fermeture de la WebSocket
     connection.on('close', function(reasonCode, description) {
         connection.send("Le client a quitté")
     });

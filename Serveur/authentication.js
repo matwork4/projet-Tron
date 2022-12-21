@@ -1,4 +1,5 @@
-const User = require('../data/user')
+const User = require('../data/models/user')
+
 authentication = {
     // What will be returned by handle()
     result : {
@@ -26,8 +27,9 @@ authentication = {
                 this.result.feedback = "le mot de passe est incorrect"
                 return JSON.stringify(this.result);
             }
+            // vérifier si l'utilisateur est déjà connecté ?
         }else{
-            // si l'user n'existe pas, on ajoute l'user et son password a la base de donnee 
+            // si l'user n'existe pas, on ajoute l'username et le password à la base de données
             User.create({
                 username : clientMessageData.username, 
                 password : clientMessageData.password, 
@@ -38,3 +40,5 @@ authentication = {
         return JSON.stringify(this.result);
     }
 }
+
+module.exports = authentication

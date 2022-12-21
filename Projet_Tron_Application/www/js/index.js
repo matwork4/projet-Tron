@@ -21,38 +21,34 @@
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 
 // Cordova is now initialized. Have fun!
-
 const ws = new WebSocket('ws://127.0.1:9898/');
 
 ws.onopen = function() {
-    console.log("Le client s'est connecté");
+    console.log("client connecté");
 };
 
-// MESSAGE DU SERVEUR
+/***** RECEPTION D'UN MESSAGE PROVENANT DU SERVEUR *****/
 ws.onmessage = function(e) {
     let serverMessage = JSON.parse(e.data);
     switch (serverMessage.type){
+        // LOGIN
         case "login" :
-            console.log(serverMessage.feedback);
+            console.log(serverMessage.feedback)
+            if (serverMessage.feedback == "success"){
+                ui.displayMainMenuView();
+            }
             break;
+
+        // LOBBY
+        case "lobby":
+            if (serverMessage.isLobbyfull){
+                ui.displayGameView()
+            }else {
+                ui.displayLobbyView();
+            }
+            break;
+
     }
 };
+/*******************************************************/
 
-// Test d'envoi au serveur
-function envoyer(){
-    ws.send('test ???');
-}
-
-//Event Listener pour se login
-const loginButton = document.getElementById('loginButton');
-const username = document.getElementById('usernameInput');
-const password = document.getElementById('passwordInput');
-loginButton.addEventListener('click', logSubmit);
-function logSubmit(event) {
-    let message ={
-        type : 'login',
-        username : username.value,
-        password : password.value
-    }
-    ws.send(JSON.stringify(message));
-}
