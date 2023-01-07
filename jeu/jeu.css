@@ -1,0 +1,115 @@
+*{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+.vueJeu{
+	display: flex;
+  	flex-direction: column;
+  	justify-content: space-around;
+}
+
+.header{
+  background-color: grey;
+  overflow: hidden;
+  height: 10vh;
+  margin: 0px;
+  padding: 0px;
+  box-shadow: 3px 3px 15px 2px black;
+
+  font-size: 1.1em;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header #title{
+	color: white;
+}
+
+
+.div_terrain{
+	width: 100%;
+	height: 80vh;
+	background-color: white;
+
+	display: flex;
+  	flex-direction: column;
+  	justify-content: center;
+  	align-items: center;
+}
+
+#terrain{
+	width: 100vw;
+	height: 100vw;
+	background-color: ghostwhite;
+	/*border: 1px solid black;*/
+	display: flex;
+  	flex-direction: column;
+  	justify-content: center;
+}
+
+#terrain table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+#terrain td{
+	height: 3vw;
+	width: 3vw;
+	/*border: 1px solid lightgrey;*/
+	margin: 0;
+	padding: 0;
+}
+
+.wall{
+	background-color: black;
+}
+
+
+.playerBlue{
+	background-color: blue;
+}
+.playerRed{
+	background-color: red;
+}
+.playerYellow{
+	background-color: orange;
+}
+.playerGreen{
+	background-color: green;
+}
+
+.blue{
+	background-color: lightblue;
+}
+.red{
+	background-color: palevioletred;
+}
+.yellow{
+	background-color: yellow;
+}
+.green{
+	background-color: lightgreen;
+}
+
+
+
+
+.footer{
+	width: 100%;
+	text-align: center;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Jeu</title>
+	<link rel="stylesheet" type="text/css" href="jeu.css">
+</head>
+<body>
+	<div class="vueJeu">
+		<div class="header">
+			<div id="title">Tron</div>
+		</div>
+		<div class="div_terrain">
+			<div id="terrain">
+			</div>
+		</div>
+		<div class="footer">
+			<p id="chrono">Temps = 0.00 s</p>
+			<button onclick="start()">Start</button>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="models/Player.js"></script>
+<script type="text/javascript" src="models/Block.js"></script>
+<script type="text/javascript" src="models/Terrain.js"></script>
+<script type="text/javascript" src="models/Game.js"></script>
+<script type="text/javascript" src="dom.js"></script>
+<script type="text/javascript" src="jeu.js"></script>
+</html>
