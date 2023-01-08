@@ -24,6 +24,10 @@ class Player{
 		}
 	}
 
+	setDirection(dir){
+		this.direction = dir;
+	}
+
 	//choix de l'IA
 	choixDirection(){
 		
