@@ -47,7 +47,7 @@ ws.onmessage = function (e) {
                 ui.displayGameView();
                 //demarrage de la partie (initPlayers() et start() sont dans jeu.js)
                 initPlayers(serverMessage.ids);
-                gameId = serverMessage.gameId;
+                window.localStorage.setItem('gameId', serverMessage.gameId);
                 start();
             } // le lobby n'est pas encore plein 
             else {

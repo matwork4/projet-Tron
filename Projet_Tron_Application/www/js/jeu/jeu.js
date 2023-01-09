@@ -1,4 +1,3 @@
-gameId = -1;
 const dimX = 34, dimY = 34;
 const sleepDuration = 60;
 var run = true;
@@ -74,7 +73,7 @@ document.addEventListener("keydown", function (event) {
 		type: "move",
 		direction: clientPlayer.direction,
 		playerId: window.localStorage.getItem('id'),
-		gameId : gameId 
+		gameId : window.localStorage.getItem('gameId') 
 	}
 	ws.send(JSON.stringify(message));
 });
@@ -119,12 +118,12 @@ function testVictoire() {
 			let message = {
 				type : "victory",
 				winnerId : window.localStorage.getItem('id'),
-				gameId : gameId 
+				gameId : window.localStorage.getItem('gameId') 
 			}
 			console.log("Infos message à envoyer : " + message.winnerId + " a gagne la partie " + message.gameId)
 			ws.send(JSON.stringify(message));
 		}
-		gameId = -1; //pourra etre utile en cas de fermeture du client et tentative de reconnexion a la partie
+		window.localStorage.removeItem('gameId'); //pourrait etre utile en cas de fermeture du client et tentative de reconnexion a la partie
 	}
 }
 
