@@ -1,7 +1,8 @@
 const User = require('../data/models/user')
 
+// Objet qui permet de gérer l'authentification
 authentication = {
-    // What will be returned by handle()
+    // Ce qui sera retourné par handle()
     result : {
         type : 'login',
         feedback : ""
@@ -10,7 +11,7 @@ authentication = {
     /*
     * Gère une demande de connection par un client de manière async pour pouvoir utiliser des await
     * @clientMessageData : le message envoyé par le client au serveur
-    * Renvoie la réponse à envoyer au client
+    * Retourne la réponse à envoyer au client
     */
     async handle(clientMessageData){
         if (clientMessageData.password == ""){

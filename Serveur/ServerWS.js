@@ -61,15 +61,14 @@ wsServer.on('request', function (request) {
 
             // VICTOIRE D'UN JOUEUR
             case "victory":
-                // Mise à jour du winner la game
+                // Mise à jour du winner de la game dans la bd
                 GameDB.findById(clientMessageData.gameId, function (err, gameDB) {
                     gameDB.winner = clientMessageData.winnerId;
                     gameDB.save();
                 });
-                // Mise a jour du nombre de victoires du vainqueur
+                // Mise a jour du nombre de victoires du vainqueur dans la bd
                 User.findById(clientMessageData.winnerId, function (err, user) {
                     user.nbWins++;
-                    console.log("user.nbWins : " + user.nbWins)
                     user.save();
                 });
                 

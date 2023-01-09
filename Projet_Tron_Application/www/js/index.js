@@ -42,18 +42,22 @@ ws.onmessage = function (e) {
 
         // LOBBY
         case "lobby":
+            // Le lobby est plein
             if (serverMessage.isLobbyFull) {
                 ui.displayGameView();
+                //demarrage de la partie (initPlayers() et start() sont dans jeu.js)
                 initPlayers(serverMessage.ids);
                 gameId = serverMessage.gameId;
                 start();
-            } else {
+            } // le lobby n'est pas encore plein 
+            else {
                 ui.displayLobbyView();
             }
             break;
 
         //MOUVEMENT D'UN JOUEUR
         case "move":
+            // on change la direction d'un joueur (players et setDirection sont dans jeu.js)
             movingPlayer = players.find(player => player.id == serverMessage.playerId);
             movingPlayer.setDirection(serverMessage.direction);
     }
