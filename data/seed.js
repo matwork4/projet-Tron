@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const User = require('models/user');
-const GameDB = require('models/game');
+const User = require('./models/user');
+const GameDB = require('./models/game');
 mongoose.connect('mongodb://localhost:27017/TronDB');
 
 const seedDB = async() =>{
@@ -9,17 +9,17 @@ const seedDB = async() =>{
         {
             username : "toto",
             password : "totomdp",
-            nbWin: 4
+            nbWins: 4
         },
         {
             username : "bibi",
             password : "bibimdp",
-            nbWin : 13
+            nbWins : 13
         },    
         {
             username : "ouioui",
             password : "ouiouimdp",
-            nbWin : 42
+            nbWins : 42
         }
     ]
     await User.insertMany(seedUser);
