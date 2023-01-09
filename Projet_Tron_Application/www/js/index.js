@@ -23,31 +23,39 @@
 // Cordova is now initialized. Have fun!
 const ws = new WebSocket('ws://127.0.1:9898/');
 
-ws.onopen = function() {
+ws.onopen = function () {
     console.log("client connecté");
 };
 
 /***** RECEPTION D'UN MESSAGE PROVENANT DU SERVEUR *****/
-ws.onmessage = function(e) {
+ws.onmessage = function (e) {
     let serverMessage = JSON.parse(e.data);
-    switch (serverMessage.type){
+    switch (serverMessage.type) {
         // LOGIN
-        case "login" :
-            console.log(serverMessage.feedback)
-            if (serverMessage.feedback == "success"){
+        case "login":
+            console.log("feedback concernant login : " + serverMessage.feedback)
+            if (serverMessage.feedback == "success") {
                 ui.displayMainMenuView();
+                window.localStorage.setItem('id', serverMessage.id);
             }
             break;
 
         // LOBBY
         case "lobby":
-            if (serverMessage.isLobbyfull){
-                ui.displayGameView()
-            }else {
+            if (serverMessage.isLobbyFull) {
+                ui.displayGameView();
+                initPlayers(serverMessage.ids);
+                gameId = serverMessage.gameId;
+                start();
+            } else {
                 ui.displayLobbyView();
             }
             break;
 
+        //MOUVEMENT D'UN JOUEUR
+        case "move":
+            movingPlayer = players.find(player => player.id == serverMessage.playerId);
+            movingPlayer.setDirection(serverMessage.direction);
     }
 };
 /*******************************************************/

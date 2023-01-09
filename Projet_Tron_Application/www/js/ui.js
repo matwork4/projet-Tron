@@ -1,10 +1,12 @@
-// Objet global pour gérer l'interface
+// Module qui permet de gérer l'ihm : passage entre les vues, gestion des event listener sur les outons
+
+// Objet global pour gérer l'ihm
 ui = {
     // Objet contenant toutes les vues
     views : {
         connection : document.getElementById("connectionView"),
         main_menu : document.getElementById("mainMenuView"),
-        game : document.getElementById("gameView"),
+        game : document.getElementById("vueJeu"),
         lobby : document.getElementById("lobbyView")
     },
 
@@ -52,7 +54,8 @@ document.getElementById('loginButton').addEventListener('click', function(event)
 document.getElementById("joinLobbyButton").addEventListener('click', function(event){
     let message = {
         type : 'joinLobby',
-        username : document.getElementById('usernameInput').value
+        username : document.getElementById('usernameInput').value,
+        id : window.localStorage.getItem('id')
     }
     ws.send(JSON.stringify(message));
 })

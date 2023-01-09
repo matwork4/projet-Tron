@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const User = require('./user');
-const Game = require('./game');
+const User = require('models/user');
+const GameDB = require('models/game');
 mongoose.connect('mongodb://localhost:27017/TronDB');
 
 const seedDB = async() =>{
@@ -46,7 +46,7 @@ const seedDB = async() =>{
             date : new Date(1995, 11, 22, 8, 44, 0).toJSON()
         }
     ];
-    await Game.insertMany(seedGames)
+    await GameDB.insertMany(seedGames)
 }
 
 seedDB().then(()=>{

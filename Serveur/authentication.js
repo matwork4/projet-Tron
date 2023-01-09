@@ -30,13 +30,17 @@ authentication = {
             // vérifier si l'utilisateur est déjà connecté ?
         }else{
             // si l'user n'existe pas, on ajoute l'username et le password à la base de données
-            User.create({
+            user = new User({
                 username : clientMessageData.username, 
                 password : clientMessageData.password, 
                 nbWins : 0
-            })
+            });
+            user.save()
         }    
+        //regarder si le joueur est dans une game ? auquel cas amener le joueur directement sur la vue
+        // du jeu au lieu du menu principal ?
         this.result.feedback = "success"
+        this.result.id = user.id
         return JSON.stringify(this.result);
     }
 }
