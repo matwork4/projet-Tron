@@ -11,11 +11,11 @@ mkdir data\db
 mongod --dbpath data\db
 # Pour seeder, il faut lancer depuis un nouveau terminal:
 node data\seed.js  
-# (Pour regarder les bases de données depuis le client mongo, il faut faire : use TronDB (puis db.users.find(), etc.))
+# Pour regarder les bases de données depuis le client mongo, lancer la commande : mongo. Puis faire : use TronDB (puis db.users.find(), etc.))
 # ###############################
 
 ### LANCER LE JEU ###
-# Si ce n'est pas notre premiere utilisation et qu'on ne vient pas de seed, lancer mongo daemon depuis un terminal dédié :
+# Si on ne vient pas de seed et donc de lancer un mongo daemon, le lancer depuis un terminal dédié :
 mongod --dbpath data\db
 # Lancer le serveur depuis un terminal dédié : 
 node Serveur\ServerWS.js
