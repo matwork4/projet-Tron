@@ -25,6 +25,17 @@ const ws = new WebSocket('ws://127.0.1:9898/');
 
 ws.onopen = function () {
     console.log("client connecté");
+    //on vérifie si le client était en pleine partie la derniere fois qu'il s'est déconnecté
+    let gameId = window.localStorage.getItem('gameId');
+    if (gameId == null)
+        return;
+    //Le client s'est déconnecté en pleine partie. Il demande au serveur les informations nécessaires pour réinitialiser son jeu
+    let message = {
+        type : 'returnToGame',
+        gameId : gameId,
+        playerId : window.localStorage.getItem('id')
+    }
+    ws.send(JSON.stringify(message));
 };
 
 /***** RECEPTION D'UN MESSAGE PROVENANT DU SERVEUR *****/
@@ -42,14 +53,15 @@ ws.onmessage = function (e) {
 
         // LOBBY
         case "lobby":
-            // Le lobby est plein
+            // Le lobby est plein, on lance le jeu
             if (serverMessage.isLobbyFull) {
                 ui.displayGameView();
-                //demarrage de la partie (initPlayers() et start() sont dans jeu.js)
-                initPlayers(serverMessage.ids);
+                //Sauvegarde de la game id dans le local storage du navigateur
                 window.localStorage.setItem('gameId', serverMessage.gameId);
-                start();
-            } // le lobby n'est pas encore plein 
+                //demarrage de la partie 
+                jeu.init(serverMessage.dim, serverMessage.ids);
+                jeu.start();
+            } // le lobby n'est pas encore plein, on affiche simplement la vue du lobby
             else {
                 ui.displayLobbyView();
             }
@@ -57,9 +69,28 @@ ws.onmessage = function (e) {
 
         //MOUVEMENT D'UN JOUEUR
         case "move":
-            // on change la direction d'un joueur (players et setDirection sont dans jeu.js)
-            movingPlayer = players.find(player => player.id == serverMessage.playerId);
+            // on change la direction d'un joueur 
+            movingPlayer = jeu.players.find(player => player.id == serverMessage.playerId);
             movingPlayer.setDirection(serverMessage.direction);
+            break;
+
+        // LE SERVEUR A ENVOYE L'ETAT DE JEU D'UN AUTRE JOUEUR DE LA PARTIE
+        case "sendGame":
+            ui.displayGameView();
+            //redémarrage de la partie grace aux données d'un autre client transmises par le serveur
+            jeu.initFromOtherPlayer(serverMessage.grille, serverMessage.players);
+            jeu.start();
+            break;
+
+        // LE SERVEUR DEMANDE L'ETAT DE LA PARTIE
+        case "askGame":
+            let message = {
+                type : 'sendGame',
+                grille : jeu.T.tab,
+                players : jeu.players
+            }
+            ws.send(JSON.stringify(message));
+            break;
     }
 };
 /*******************************************************/

@@ -33,16 +33,16 @@ class Player{
 	choixDirection(){
 		
 		let bonChoix = true;
-		let b = T.getBlockByID(this.idBlock);
+		let b = jeu.T.getBlockByID(this.idBlock);
 
 		//On vérifie si la case devant lui est un mur
-		if(this.direction == 'N' && T.getBlockByID((this.idBlock)-(dimY-1)).isWall){
+		if(this.direction == 'N' && jeu.T.getBlockByID((this.idBlock)-(dimY-1)).isWall){
 			bonChoix = false;
-		}else if(this.direction == 'S' && T.getBlockByID((this.idBlock)+(dimY-1)).isWall){
+		}else if(this.direction == 'S' && jeu.T.getBlockByID((this.idBlock)+(dimY-1)).isWall){
 			bonChoix = false;
-		}else if(this.direction == 'E' && T.getBlockByID((this.idBlock)+1).isWall){
+		}else if(this.direction == 'E' && jeu.T.getBlockByID((this.idBlock)+1).isWall){
 			bonChoix = false;
-		}else if(this.direction == 'O' && T.getBlockByID((this.idBlock)-1).isWall){
+		}else if(this.direction == 'O' && jeu.T.getBlockByID((this.idBlock)-1).isWall){
 			bonChoix = false;
 		}
 
@@ -51,16 +51,16 @@ class Player{
 		if(bonChoix == false || getRandomInt(60) == 0){
 			//On ajoute les choix possibles dans un tableau
 			bonChoix = [];
-			if(T.getBlockByID((this.idBlock)-(dimY-1)).isWall == false){
+			if(jeu.T.getBlockByID((this.idBlock)-(dimY-1)).isWall == false){
 				bonChoix.push('N');
 			}
-			if(T.getBlockByID((this.idBlock)+(dimY-1)).isWall == false){
+			if(jeu.T.getBlockByID((this.idBlock)+(dimY-1)).isWall == false){
 				bonChoix.push('S');
 			}
-			if(T.getBlockByID((this.idBlock)+1).isWall == false){
+			if(jeu.T.getBlockByID((this.idBlock)+1).isWall == false){
 				bonChoix.push('E');
 			}
-			if(T.getBlockByID((this.idBlock)-1).isWall == false){
+			if(jeu.T.getBlockByID((this.idBlock)-1).isWall == false){
 				bonChoix.push('O');
 			}
 

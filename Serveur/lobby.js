@@ -1,10 +1,12 @@
 const games = require('./games')
 const GameDB = require('../data/models/game');
+var Game = require('./Game');
 
 // Objet qui permet de gérer le lobby
 lobby = {
     queue : [], // File d'attente des joueurs. Contient les websockets pour chaque joueur 
     minimumPlayersNumber : 2,
+    dimensionTerrain : 34,
     ids : [], //contient les ids de chaque joueur
 
     // Gere une demande de connection d'un client à un lobby
@@ -25,12 +27,12 @@ lobby = {
                 date : new Date().toJSON()
             })
             gameDB.save()
-            //on ajoute les connections aux clients à l'objet des games en cours à l'"indice" gameDB.id
-            games[gameDB.id] = this.queue
-            //on envoie aux joueurs du lobby l'id de chaque joueur et l'id de la partie pour qu'ils 
-            //puissent créer la partie de leur cote
+            //on ajoute les connections aux clients et les ids correspondants à l'objet des games en cours à l'"indice" gameDB.id
+            games[gameDB.id] = new Game(this.queue, this.ids)
+            //on envoie aux joueurs du lobby l'id de chaque joueur et l'id de la partie pour qu'ils puissent créer la partie de leur coté
             message.ids = this.ids;
             message.gameId = gameDB.id;
+            message.dim = this.dimensionTerrain
             message.isLobbyFull = true;
             for (let currentConnection of this.queue){
                 currentConnection.send(JSON.stringify(message));

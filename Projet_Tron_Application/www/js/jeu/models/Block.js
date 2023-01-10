@@ -1,11 +1,11 @@
 
 class Block{
 
-	constructor(idBlock){
+	constructor(idBlock, color=0, isWall=false, isPlayer=false){
 		this.id = idBlock;
-		this.color = 0; //0: vide, 1: bleu, 2: rouge, 3: jaune, 4: vert
-		this.isWall = false;
-		this.isPlayer = false;
+		this.color = color; //0: vide, 1: bleu, 2: rouge, 3: jaune, 4: vert
+		this.isWall = isWall;
+		this.isPlayer = isPlayer;
 	}
 
 	setWall(){

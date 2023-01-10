@@ -5,41 +5,41 @@ function displayTerrain(){
 	let terrain = document.createElement("table");
 	terrain.setAttribute('id',"childTerrain");
 
-		for(let i=0; i<dimY-1; i++){
+		for(let i=0; i<jeu.T.dimY-1; i++){
 			let ligne = document.createElement("tr");
-			for(let j=0; j<dimX-1; j++){
+			for(let j=0; j<jeu.T.dimX-1; j++){
 				let col = document.createElement("td");
 				//col.innerHTML = "0";
 
-				//console.log("T.tab["+i+"]["+j+"].isWall = "+T.tab[i][j].isWall);
-				if(T.tab[i][j].isWall){
+				//console.log("jeu.T.tab["+i+"]["+j+"].isWall = "+jeu.T.tab[i][j].isWall);
+				if(jeu.T.tab[i][j].isWall){
 					col.setAttribute('class', "wall");
 				}
 				
-				if(T.tab[i][j].isPlayer){
-					if(T.tab[i][j].color == 1){
+				if(jeu.T.tab[i][j].isPlayer){
+					if(jeu.T.tab[i][j].color == 1){
 						col.setAttribute('class', "playerBlue");
-					}else if(T.tab[i][j].color == 2){
+					}else if(jeu.T.tab[i][j].color == 2){
 						col.setAttribute('class', "playerRed");
-					}else if(T.tab[i][j].color == 3){
+					}else if(jeu.T.tab[i][j].color == 3){
 						col.setAttribute('class', "playerYellow");
-					}else if(T.tab[i][j].color == 4){
+					}else if(jeu.T.tab[i][j].color == 4){
 						col.setAttribute('class', "playerGreen");
 					}
 				}else{
-					if(T.tab[i][j].color == 1){
+					if(jeu.T.tab[i][j].color == 1){
 						col.setAttribute('class', "blue");
-					}else if(T.tab[i][j].color == 2){
+					}else if(jeu.T.tab[i][j].color == 2){
 						col.setAttribute('class', "red");
-					}else if(T.tab[i][j].color == 3){
+					}else if(jeu.T.tab[i][j].color == 3){
 						col.setAttribute('class', "yellow");
-					}else if(T.tab[i][j].color == 4){
+					}else if(jeu.T.tab[i][j].color == 4){
 						col.setAttribute('class', "green");
 					}
 				}
 
-				col.setAttribute('id', 'block'+T.tab[i][j].id);
-				//col.setAttribute('onclick','clickBlock('+T.tab[i][j].id+')');
+				col.setAttribute('id', 'block'+jeu.T.tab[i][j].id);
+				//col.setAttribute('onclick','clickBlock('+jeu.T.tab[i][j].id+')');
 
 				ligne.appendChild(col);
 			}
@@ -54,32 +54,10 @@ function deleteTerrain(){
 }
 
 function updateChrono(){
-	chrono+=sleepDuration+49; //on estime à 49ms le temps d'exécution de chaque boucle
-	document.getElementById("chrono").innerHTML = "Temps = "+(chrono/1000)+" s";
+	jeu.chrono+=jeu.sleepDuration+49; //on estime à 49ms le temps d'exécution de chaque boucle
+	document.getElementById("chrono").innerHTML = "Temps = "+(jeu.chrono/1000)+" s";
 
 }
-
-// Event Listener sur le bouton pour se login
-document.getElementById('loginButton').addEventListener('click', function(event){
-    let message = {
-        type : 'login',
-        username : document.getElementById('usernameInput').value,
-        password : document.getElementById('passwordInput').value
-    }
-    ws.send(JSON.stringify(message));
-})
-
-// Event listener sur le bouton pour rejoindre un lobby
-document.getElementById("joinLobbyButton").addEventListener('click', function(event){
-    let message = {
-        type : 'joinLobby',
-        username : document.getElementById('usernameInput').value,
-        id : window.localStorage.getItem('id')
-    }
-    ws.send(JSON.stringify(message));
-})
-
-
 
 
 

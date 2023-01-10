@@ -1,6 +1,7 @@
 var authentication = require('./authentication')
 var lobby = require('./lobby')
 const games = require('./games')
+
 /********************  MONGOOSE *********************/
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/TronDB')
@@ -31,17 +32,18 @@ console.log("serveur lancé")
 // Mise en place des événements WebSockets
 wsServer.on('request', function (request) {
     const connection = request.accept(null, request.origin);
-    // Ecrire ici le code qui indique ce que l'on fait :
-    // -en cas de réception de message 
+    // Réception d'un message 
     connection.on('message', function (clientMessage) {
         // récuperation du message du client sous forme d'object
         let clientMessageData = JSON.parse(clientMessage.utf8Data);
+        //réponse eventuelle du serveur
+        let message = {}
 
         // Switch selon le type du message envoyé par le client (tentative de login, deplacement de la moto...)
         switch (clientMessageData.type) {
             // TENTATIVE DE LOGIN
             case 'login':
-                // on gère la tentative d'authentification et le serveur envoie le résultat de cette tentative au client.
+                // le serveur gère la tentative d'authentification et envoie le résultat au client.
                 // authentication.handle() est async et renvoie donc une Promise. Pour pouvoir utiliser ce que la fonction retourne, on utilise then
                 authentication.handle(clientMessageData).then(response => {
                     connection.send(response)
@@ -55,13 +57,13 @@ wsServer.on('request', function (request) {
 
             // DEPLACEMENT D'UN JOUEUR
             case 'move':
-                //notifie touts les autres joueurs de la game du changement de direction
+                //notifie touts les autres joueurs dans la game du changement de direction
                 games.move(clientMessageData.playerId, clientMessageData.direction, clientMessageData.gameId);
                 break;
 
             // VICTOIRE D'UN JOUEUR
             case "victory":
-                // Mise à jour du winner de la game dans la bd
+                // Mise à jour du vainqueur de la partie dans la bd
                 GameDB.findById(clientMessageData.gameId, function (err, gameDB) {
                     gameDB.winner = clientMessageData.winnerId;
                     gameDB.save();
@@ -71,7 +73,39 @@ wsServer.on('request', function (request) {
                     user.nbWins++;
                     user.save();
                 });
-                
+                games[clientMessageData.gameId].isOver = true;
+                break;
+
+            // UN JOUEUR VEUT REVENIR DANS UNE PARTIE APRES DECONNEXION
+            case "returnToGame":
+                // on récupère l'objet qui contient les connexions aux autre joueurs de la partie
+                let game = games[clientMessageData.gameId]
+                if (game != undefined && !game.isOver) {
+                    message = {
+                        type: "askGame",
+                    }
+                    for (let i = 0; i < game.ids.length; i++) {
+                        //si c'est bien un client différent de celui qui s'est déconnecté, on lui demande ses infos du jeu
+                        if (game.ids[i] != clientMessageData.playerId) {
+                            game.connections[i].send(JSON.stringify(message));
+                        }
+                    }
+                    //on enregistre la connection au joueur qui veut se reconnecter a la partie
+                    comingBackPlayerConnection = connection
+                    game.connections.push(connection)
+                    game.ids.push(clientMessageData.playerId)
+                }
+                break;
+
+            // UN CLIENT A ENVOYE L'ETAT DE SON JEU
+            case "sendGame":
+                message = {
+                    type: "sendGame",
+                    grille: clientMessageData.grille,
+                    players: clientMessageData.players
+                }
+                // le serveur transmet ces informations au client qui souhaite se reconnecter à la partie
+                comingBackPlayerConnection.send(JSON.stringify(message))
                 break;
         }
     });
