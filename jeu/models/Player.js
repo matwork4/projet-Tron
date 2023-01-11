@@ -24,6 +24,10 @@ class Player{
 		}
 	}
 
+	setDirection(dir){
+		this.direction = dir;
+	}
+
 	//choix de l'IA
 	choixDirection(){
 		
@@ -63,7 +67,7 @@ class Player{
 			if(bonChoix.length > 0){
 				let random = getRandomInt(bonChoix.length);
 				this.direction = bonChoix[random];
-				console.log("Bot "+this.id+" turn "+this.direction);
+				//console.log("Bot "+this.id+" turn "+this.direction);
 			}else{
 				console.log("Rip Bot "+this.id);
 			}
@@ -75,9 +79,3 @@ class Player{
 
 
 }
-
-
-
-
-
-

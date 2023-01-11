@@ -59,8 +59,29 @@ function updateChrono(){
 
 }
 
+function updateArrow(dir){
 
+	var haut = document.getElementById("btn_haut");
+	var bas = document.getElementById("btn_bas");
+	var gauche = document.getElementById("btn_gauche");
+	var droite = document.getElementById("btn_droite");
 
+	haut.style.boxShadow = "";
+	bas.style.boxShadow = "";
+	gauche.style.boxShadow = "";
+	droite.style.boxShadow = "";
+
+	if(dir == "N"){
+		haut.style.boxShadow = "2px 2px 10px 2px black";
+	}else if(dir == "S"){
+		bas.style.boxShadow = "2px 2px 10px 2px black";
+	}else if(dir == "E"){
+		droite.style.boxShadow = "2px 2px 10px 2px black";
+	}else if(dir == "O"){
+		gauche.style.boxShadow = "2px 2px 10px 2px black";
+	}
+
+}
 
 
 
