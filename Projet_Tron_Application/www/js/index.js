@@ -91,6 +91,11 @@ ws.onmessage = function (e) {
             }
             ws.send(JSON.stringify(message));
             break;
+
+        // LE SERVEUR A ENVOYE LES MEILLEURS SCORES
+        case "leaderboard":
+            ui.displayLeaderboard(serverMessage.users)
+            break;
     }
 };
 /*******************************************************/

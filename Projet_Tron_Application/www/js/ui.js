@@ -7,7 +7,9 @@ ui = {
         connection : document.getElementById("connectionView"),
         main_menu : document.getElementById("mainMenuView"),
         game : document.getElementById("vueJeu"),
-        lobby : document.getElementById("lobbyView")
+        lobby : document.getElementById("lobbyView"),
+        leaderboard : document.getElementById("leaderboardView"),
+        result : document.getElementById("resultView"),
     },
 
     /*
@@ -37,6 +39,24 @@ ui = {
     displayLobbyView(){
         this.hideAllViews();
         this.views.lobby.style.display = "block";
+    },
+
+    displayLeaderboard(users){
+        this.hideAllViews();
+        this.views.leaderboard.style.display = "block";
+        let scoreDom = document.getElementById("score");
+        // on réinitialise le tableau des scores dans le cas où on l'a déjà regardé durant la session
+        scoreDom.innerHTML =""
+        //on affiche chaque utilisateur qui a au moins une victoire
+        for (let user of users){
+            scoreDom.innerHTML += user.username + " : " + user.nbWins + "</br>"
+        }
+    },
+
+    displayResultView(result){
+        this.hideAllViews();
+        this.views.result.style.display = "block";
+        document.getElementById("result").innerHTML = result
     },
 }
 

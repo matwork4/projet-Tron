@@ -68,8 +68,15 @@
             <!-- Page du menu principal -->
             <div id="mainMenuView">
                 Main menu view
-                <button id="joinLobbyButton">Rejoindre le lobby</button>
-                <button>Meilleurs scores</button>
+                <button class="joinLobbyButton">Rejoindre le lobby</button>
+                <button id="leaderboardButton">Meilleurs scores</button>
+            </div>
+
+            <!-- Page du leaderboard -->
+            <div id="leaderboardView">
+                Meilleurs scores
+                <div id="score"></div>
+                <button class="menuButton">Menu principal</button>
             </div>
 
             <!-- Page du lobby -->
@@ -87,6 +94,13 @@
                     <p id="chrono">Temps = 0.00 s</p>
                     <!-- <button onclick="start()">Start</button> -->
                 </div>
+            </div>
+
+            <!-- Page du résultat de la partie -->
+            <div id="resultView">
+                <div id="result"></div>
+                <button class="joinLobbyButton">Jouer une nouvelle partie</button>
+                <button class="menuButton">Menu principal</button>
             </div>
 
         </div>

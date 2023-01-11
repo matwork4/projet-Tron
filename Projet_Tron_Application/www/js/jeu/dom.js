@@ -2,6 +2,8 @@
 */
 
 function displayTerrain(){
+	console.log("displayTerrain")
+
 	let terrain = document.createElement("table");
 	terrain.setAttribute('id',"childTerrain");
 
@@ -50,6 +52,7 @@ function displayTerrain(){
 }
 
 function deleteTerrain(){
+	console.log("deleteTerrain")
 	document.getElementById("childTerrain").remove();
 }
 

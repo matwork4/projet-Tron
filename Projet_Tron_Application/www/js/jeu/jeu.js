@@ -12,6 +12,8 @@ jeu = {
 	Manière normale d'initialiser le jeu
 	*/
 	init(dim, ids) {
+		this.run = true
+		this.chrono = 0
 		Terrain.initWithDim(dim, dim)
 		this.T = Terrain
 		this.initPlayersFromIds(ids);
@@ -24,6 +26,8 @@ jeu = {
 	 Manière d'initialiser le jeu après s'etre déconnecté. @grille et @players sont envoyés par un autre joueur de la partie
 	*/
 	initFromOtherPlayer(grille, players){
+		this.run = true
+		this.chrono = 0
 		Terrain.initWithGrid(grille)
 		this.T = Terrain
 		this.initPlayersFromPlayersList(players);
@@ -32,6 +36,7 @@ jeu = {
 
 	// init les 4 joueurs lors de la reception des ids des autres joueurs. Initialisation normale
 	initPlayersFromIds(ids) {
+		this.players=[]
 		for (let i = 0; i < ids.length; i++) {
 			//sa couleur, l'id du bloc, sa direction, si on le controle, si c'est un bot, son id
 			this.players.push(new Player(i + 1, this.startingPositions[i], this.startingDirections[i], false, false, ids[i]))
@@ -77,6 +82,7 @@ jeu = {
 	},
 
 	async start() {
+		console.log("start")
 		while (this.run) {
 			this.avancePlayers();
 			deleteTerrain();
@@ -85,6 +91,7 @@ jeu = {
 			updateChrono();
 			this.testVictoire();
 		}
+		deleteTerrain();
 	},
 
 	testVictoire() {
@@ -98,8 +105,15 @@ jeu = {
 		if (nbPlayersAlive < 2) {
 			this.run = false;
 			console.log("Jeu terminé");
+			//Cas d'égalité
 			if (nbPlayersAlive == 0) {
 				console.log("Egalité !");
+				let message = {
+					type: "gameOver",
+					gameId: window.localStorage.getItem('gameId')
+				}
+				ws.send(JSON.stringify(message));
+				ui.displayResultView("Egalité")
 			}
 			// en cas de victoire du client, on envoie un message au serveur pour qu'il mette a jour le vainqueur dans la bd
 			if (this.clientPlayer.isAlive) {
@@ -109,6 +123,7 @@ jeu = {
 					gameId: window.localStorage.getItem('gameId')
 				}
 				ws.send(JSON.stringify(message));
+				ui.displayResultView("Victoire !")
 			}
 			window.localStorage.removeItem('gameId'); //pourra etre utile en cas de fermeture du client et tentative de reconnexion a la partie
 		}

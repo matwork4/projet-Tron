@@ -19,11 +19,17 @@ class Player{
 		this.isBot = isBot;
 	}
 
+	/*
+	* Vérifie si le joueur est mort, auquel cas renvoie vrai
+	*/
 	die(newB){
 		if(newB.isWall){
 			this.isAlive = false;
+			return true
 		}
+		return false
 	}
+		
 
 	setDirection(dir){
 		this.direction = dir;

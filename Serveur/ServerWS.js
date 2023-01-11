@@ -76,6 +76,12 @@ wsServer.on('request', function (request) {
                 games[clientMessageData.gameId].isOver = true;
                 break;
 
+            // FIN D'UNE PARTIE (PAR EGALITE)
+            case "gameOver" :
+                // Empeche notamment un joueur qui se serait déconnecté de rejoindre la partie
+                games[clientMessageData.gameId].isOver = true;
+                break;
+
             // UN JOUEUR VEUT REVENIR DANS UNE PARTIE APRES DECONNEXION
             case "returnToGame":
                 // on récupère l'objet qui contient les connexions aux autre joueurs de la partie
@@ -106,6 +112,17 @@ wsServer.on('request', function (request) {
                 }
                 // le serveur transmet ces informations au client qui souhaite se reconnecter à la partie
                 comingBackPlayerConnection.send(JSON.stringify(message))
+                break;
+
+            // UN CLIENT DEMANDE LES MEILLEURS SCORES
+            case "leaderboard":
+                User.find({nbWins: { $gte: 0 }}).sort('-nbWins').exec(function (err, users) {
+                    message = {
+                        type: "leaderboard",
+                        users:users
+                    }
+                    connection.send(JSON.stringify(message))
+                });
                 break;
         }
     });

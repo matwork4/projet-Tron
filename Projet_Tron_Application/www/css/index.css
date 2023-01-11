@@ -121,7 +121,13 @@ h1 {
     display: none;
 }
 
+#leaderboardView{
+    display: none;
+}
 
+#resultView{
+    display: none;
+}
 #vueJeu{
 	display: none;
   	flex-direction: column;
