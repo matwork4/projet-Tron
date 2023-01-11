@@ -116,7 +116,7 @@ wsServer.on('request', function (request) {
 
             // UN CLIENT DEMANDE LES MEILLEURS SCORES
             case "leaderboard":
-                User.find({nbWins: { $gte: 0 }}).sort('-nbWins').exec(function (err, users) {
+                User.find({nbWins: { $gt: 0 }}).sort('-nbWins').exec(function (err, users) {
                     message = {
                         type: "leaderboard",
                         users:users
