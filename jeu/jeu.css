@@ -110,6 +110,11 @@
 	background-color: lightgreen;
 }
 
+#info_couleur{
+	font-weight: bold;
+	/*color: green;*/
+}
+
 
 .footer{
 	height: 30vh;
