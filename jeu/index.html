@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tron</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="header">
+		<div id="title">Tron</div>
+	</div>
+	<div id="vueConnexion">
+		<div class="box">
+			<form autocomplete="off">
+				<h2>Sign in</h2>
+				<div class="inputBox">
+					<input type="text" required="required">
+					<span>Userame</span>
+					<i></i>
+				</div>
+				<div class="inputBox">
+					<input type="password" required="required">
+					<span>Password</span>
+					<i></i>
+				</div>
+				<!--
+				<div class="links">
+					<a href="#">Forgot Password ?</a>
+					<a href="#">Signup</a>
+				</div>-->
+				<input id="btn_submit" type="submit" value="Login" onclick="seek('vueMenu')">
+			</form>
+		</div>
+	</div>
+	<div id="vueMenu">
+		<div class="box">
+			<div id="inside">
+				<h2>Menu</h2>
+				<button onclick="seek('vueLobby')">Join Lobby</button>
+        		<button onclick="seek('vueScores')">Leaderboard</button>
+        		<button onclick="seek('vueConnexion')">Log out</button>
+        	</div>
+		</div>
+	</div>
+	<div id="vueLobby">
+		<div class="box">
+			<div id="inside">
+				<p onclick="seek('vueJeu')">Waiting for players ...</p>
+				<button onclick="seek('vueMenu')">Back to Menu</button>
+			</div>
+		</div>
+
+	</div>
+	<div id="vueScores">
+		<div class="box">
+			<div id="inside">
+				<h2>Leaderboard</h2>
+				<div id="scores">
+					<p>Moustafa: 6543 wins</p>
+					<p>guiguipiopio: 21 wins</p>
+					<p>Coca-Cola: 8 wins</p>
+					<p>yngd: 2 wins</p>
+				</div>
+				<button onclick="seek('vueMenu')">Back to Menu</button>
+			</div>
+		</div>
+	</div>
+	<div id="vueEcranFin">
+		<div class="box">
+			<div id="inside">
+				<h2>Winner</h2>
+				<p id="winner">bobby_lasticot</p>
+				<button onclick="seek('vueLobby')">Play again</button>
+				<button onclick="seek('vueMenu')">Back to Menu</button>
+			</div>
+		</div>
+	</div>
+	<div id="vueJeu">
+		<div class="box">
+			<div id="terrain">
+			</div>
+		</div>
+		<div class="footer">
+			<p id="info_couleur">Vide</p>
+			<table id="arrow_div">
+				<tr>
+					<td></td>
+					<td id="btn_haut" onclick="pressDirection('N')"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td id="btn_gauche" onclick="pressDirection('O')"></td>
+					<td></td>
+					<td id="btn_droite" onclick="pressDirection('E')"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td id="btn_bas" onclick="pressDirection('S')"></td>
+					<td></td>
+				</tr>
+			</table>
+			<button id="btn_start" onclick="start()">Start</button>
+			<p id="chrono">Temps = 0.00 s</p>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="models/Player.js"></script>
+<script type="text/javascript" src="models/Block.js"></script>
+<script type="text/javascript" src="models/Terrain.js"></script>
+<script type="text/javascript" src="models/Game.js"></script>
+<script type="text/javascript" src="dom.js"></script>
+<script type="text/javascript" src="jeu.js"></script>
+</html>

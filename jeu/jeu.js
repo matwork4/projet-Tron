@@ -98,6 +98,7 @@ async function start(){
 		updateChrono();
 		testVictoire();
 	}
+	seek("vueEcranFin");
 }
 
 
