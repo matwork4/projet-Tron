@@ -9,7 +9,7 @@ var indiceMe = null; //quel joueur on est (commence à 0)
 var T = new Terrain(dimX,dimY);
 
 // Variable a modifier depuis le lobby
-var playersFromLobby = ["ki","bot","bot","me"];
+var playersFromLobby = ["bot","bot","bot","me"];
 
 var players = [];
 initPlayers();
