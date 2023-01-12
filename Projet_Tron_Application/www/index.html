@@ -38,15 +38,81 @@
     </head>
     <body>
         <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
+
+            <!-- Ce qui était créé automatiquement par cordova -->
+            <!-- <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <div>
                     <h1><button onclick="envoyer()"></button></h1>
                 </div>
                 <p class="event received">Device is Ready</p>
+            </div> -->
+
+            <!-- Header -->
+            <!-- <div class="header">
+                <div id="title">Tron</div>
+            </div> -->
+            
+            <!-- Page de connexion -->
+            <div id="connectionView">
+                <form>
+                    <label>Username:</label>
+                    <input type="text" name="username" id="usernameInput">
+                    <label>Password:</label>
+                    <input type="text" name="password" id="passwordInput">
+
+                    <input type="button" value="Login" id="loginButton"/>
+                </form>
             </div>
+
+            <!-- Page du menu principal -->
+            <div id="mainMenuView">
+                Main menu view
+                <button class="joinLobbyButton">Rejoindre le lobby</button>
+                <button id="leaderboardButton">Meilleurs scores</button>
+            </div>
+
+            <!-- Page du leaderboard -->
+            <div id="leaderboardView">
+                Meilleurs scores
+                <div id="score"></div>
+                <button class="menuButton">Menu principal</button>
+            </div>
+
+            <!-- Page du lobby -->
+            <div id="lobbyView">
+                Lobby view
+            </div>
+            
+            <!-- Page du jeu -->
+            <div id="vueJeu">
+                <div class="div_terrain">
+                    <div id="terrain">
+                    </div>
+                </div>
+                <div class="footer">
+                    <p id="chrono">Temps = 0.00 s</p>
+                    <!-- <button onclick="start()">Start</button> -->
+                </div>
+            </div>
+
+            <!-- Page du résultat de la partie -->
+            <div id="resultView">
+                <div id="result"></div>
+                <button class="joinLobbyButton">Jouer une nouvelle partie</button>
+                <button class="menuButton">Menu principal</button>
+            </div>
+
         </div>
+        <script src="js/ui.js"></script>
+        <script src="js/event_listeners.js"></script>
+        <script type="text/javascript" src="js/jeu/models/Player.js"></script>
+        <script type="text/javascript" src="js/jeu/models/Block.js"></script>
+        <script type="text/javascript" src="js/jeu/models/Terrain.js"></script>
+        <script type="text/javascript" src="js/jeu/models/Game.js"></script>
+        <script type="text/javascript" src="js/jeu/dom.js"></script>
+        <script type="text/javascript" src="js/jeu/jeu.js"></script>
         <script src="js/index.js"></script>
+
     </body>
 </html>

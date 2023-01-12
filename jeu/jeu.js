@@ -18,6 +18,7 @@ updateInfoCouleur(indiceMe);
 // init les 4 joueurs
 function initPlayers(){
 	//sa couleur, l'id du bloc, sa direction, si on le controle, si c'est un bot
+
 	players.push(new Player(1,103,"S", false, false)); 
 	players.push(new Player(2,129,"O", false, false));
 	players.push(new Player(3,961,"E", false, false));
@@ -30,6 +31,7 @@ function initPlayers(){
 		}else if(playersFromLobby[i] == "bot"){
 			players[i].isBot = true;
 		}
+
 		T.addPlayer(players[i]);
 	}
 }
@@ -54,6 +56,21 @@ function avancePlayers(){
 		}
 	}
 }
+
+document.addEventListener("keydown", function(event) {
+    if (event.keyCode === 38 && players[0].direction != "S") { // Up arrow key
+      players[0].setDirection("N");
+    } else if (event.keyCode === 40) { // Down arrow key
+		console.log("test");
+		players[0].setDirection("S");
+    } else if (event.keyCode === 37) { // Left arrow key
+		console.log("test");
+		players[0].setDirection("O");
+    } else if (event.keyCode === 39) { // Right arrow key
+		console.log("test");
+		players[0].setDirection("E");
+    }
+  });
 
 
 // Direction du joueur au clavier
