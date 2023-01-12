@@ -59,8 +59,51 @@ function updateChrono(){
 
 }
 
+// update le style des flèches pour donner un feedback à l'utilisateur sur sa direction
+function updateArrow(dir){
 
+	var haut = document.getElementById("btn_haut");
+	var bas = document.getElementById("btn_bas");
+	var gauche = document.getElementById("btn_gauche");
+	var droite = document.getElementById("btn_droite");
 
+	haut.style.boxShadow = "";
+	bas.style.boxShadow = "";
+	gauche.style.boxShadow = "";
+	droite.style.boxShadow = "";
+
+	if(dir == "N"){
+		haut.style.boxShadow = "2px 2px 10px 2px black";
+	}else if(dir == "S"){
+		bas.style.boxShadow = "2px 2px 10px 2px black";
+	}else if(dir == "E"){
+		droite.style.boxShadow = "2px 2px 10px 2px black";
+	}else if(dir == "O"){
+		gauche.style.boxShadow = "2px 2px 10px 2px black";
+	}
+
+}
+
+// update l'info couleur pour que le joueur sache qui il est
+// attention : ne fonctionne pas sur les daltoniens 
+function updateInfoCouleur(col){
+	var elem = document.getElementById("info_couleur");
+
+	if(col==0){
+		elem.innerHTML = "Vous êtes Bleu";
+		elem.style.color = "blue";
+	}else if(col==1){
+		elem.innerHTML = "Vous êtes Rouge";
+		elem.style.color = "red";
+	}else if(col==2){
+		elem.innerHTML = "Vous êtes Jaune";
+		elem.style.color = "orange";
+	}else if(col==3){
+		elem.innerHTML = "Vous êtes Vert";
+		elem.style.color = "green";
+	}
+
+}
 
 
 
