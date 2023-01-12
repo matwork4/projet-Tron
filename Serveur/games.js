@@ -2,11 +2,11 @@
 // Fonctionne comme un dictionnaire avec l'id de la game comme clef
 games = {    
     // notifie tous les joueurs d'une partie qu'un joueur a changé de direction
-    move(playerId, direction, gameId) {
+    move(color, direction, gameId) {
         let connections = this[gameId].connections
         let message = {
             type: "move",
-            playerId: playerId,
+            color: color,
             direction: direction
         }
         for (let connection of connections) {

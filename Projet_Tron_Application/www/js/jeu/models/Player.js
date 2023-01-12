@@ -42,9 +42,9 @@ class Player{
 		let b = jeu.T.getBlockByID(this.idBlock);
 
 		//On vérifie si la case devant lui est un mur
-		if(this.direction == 'N' && jeu.T.getBlockByID((this.idBlock)-(dimY-1)).isWall){
+		if(this.direction == 'N' && jeu.T.getBlockByID((this.idBlock)-(jeu.T.dimY-1)).isWall){
 			bonChoix = false;
-		}else if(this.direction == 'S' && jeu.T.getBlockByID((this.idBlock)+(dimY-1)).isWall){
+		}else if(this.direction == 'S' && jeu.T.getBlockByID((this.idBlock)+(jeu.T.dimY-1)).isWall){
 			bonChoix = false;
 		}else if(this.direction == 'E' && jeu.T.getBlockByID((this.idBlock)+1).isWall){
 			bonChoix = false;
@@ -57,10 +57,10 @@ class Player{
 		if(bonChoix == false || getRandomInt(60) == 0){
 			//On ajoute les choix possibles dans un tableau
 			bonChoix = [];
-			if(jeu.T.getBlockByID((this.idBlock)-(dimY-1)).isWall == false){
+			if(jeu.T.getBlockByID((this.idBlock)-(jeu.T.dimY-1)).isWall == false){
 				bonChoix.push('N');
 			}
-			if(jeu.T.getBlockByID((this.idBlock)+(dimY-1)).isWall == false){
+			if(jeu.T.getBlockByID((this.idBlock)+(jeu.T.dimY-1)).isWall == false){
 				bonChoix.push('S');
 			}
 			if(jeu.T.getBlockByID((this.idBlock)+1).isWall == false){
@@ -75,6 +75,7 @@ class Player{
 				let random = getRandomInt(bonChoix.length);
 				this.direction = bonChoix[random];
 				console.log("Bot "+this.id+" turn "+this.direction);
+				sendMessage("move", this.direction, this.id, this.color, window.localStorage.getItem('gameId'));
 			}else{
 				console.log("Rip Bot "+this.id);
 			}

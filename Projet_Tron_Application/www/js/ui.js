@@ -33,7 +33,7 @@ ui = {
     
     displayGameView(){
         this.hideAllViews();
-        this.views.game.style.display = "block";
+        this.views.game.style.display = "flex";
     },
     
     displayLobbyView(){

@@ -70,7 +70,7 @@ ws.onmessage = function (e) {
         //MOUVEMENT D'UN JOUEUR
         case "move":
             // on change la direction d'un joueur 
-            movingPlayer = jeu.players.find(player => player.id == serverMessage.playerId);
+            movingPlayer = jeu.players.find(player => player.color == serverMessage.color);
             movingPlayer.setDirection(serverMessage.direction);
             break;
 

@@ -91,8 +91,26 @@
                     </div>
                 </div>
                 <div class="footer">
+                    <p id="info_couleur">Vide</p>
+                    <table id="arrow_div">
+                        <tr>
+                            <td></td>
+                            <td id="btn_haut" onclick="pressDirection('N')"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td id="btn_gauche" onclick="pressDirection('O')"></td>
+                            <td></td>
+                            <td id="btn_droite" onclick="pressDirection('E')"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td id="btn_bas" onclick="pressDirection('S')"></td>
+                            <td></td>
+                        </tr>
+                    </table>
                     <p id="chrono">Temps = 0.00 s</p>
-                    <!-- <button onclick="start()">Start</button> -->
+
                 </div>
             </div>
 

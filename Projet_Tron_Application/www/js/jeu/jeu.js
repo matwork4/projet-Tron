@@ -1,10 +1,13 @@
 jeu = {
-	sleepDuration: 400,//60,
+	sleepDuration: 100,
 	run: true,
 	chrono: 0,
 	startingPositions: [103, 129, 961, 987],
 	startingDirections: ["S", "O", "E", "N"],
 	players: [],
+	nbPlayers: 4, //nombre de joueurs max
+	indiceMe: null, //quel joueur on est (commence à 0)
+	result:"egalite",
 
 	/* Initialise le terrain et la liste des joueurs à partir de : 
 	-@dim : la dimension du terrain
@@ -17,6 +20,7 @@ jeu = {
 		Terrain.initWithDim(dim, dim)
 		this.T = Terrain
 		this.initPlayersFromIds(ids);
+		updateInfoCouleur(this.indiceMe);
 		displayTerrain();
 	},
 
@@ -31,23 +35,33 @@ jeu = {
 		Terrain.initWithGrid(grille)
 		this.T = Terrain
 		this.initPlayersFromPlayersList(players);
+		updateInfoCouleur(this.indiceMe);
 		displayTerrain();
 	},
 
 	// init les 4 joueurs lors de la reception des ids des autres joueurs. Initialisation normale
 	initPlayersFromIds(ids) {
 		this.players=[]
+		//création des joueurs humains
 		for (let i = 0; i < ids.length; i++) {
 			//sa couleur, l'id du bloc, sa direction, si on le controle, si c'est un bot, son id
 			this.players.push(new Player(i + 1, this.startingPositions[i], this.startingDirections[i], false, false, ids[i]))
 		}
+		// création des bots
+		for(let i=ids.length ; i<this.nbPlayers ; i++){
+		 	this.players.push(new Player(i + 1, this.startingPositions[i], this.startingDirections[i], false, true, 0))
+		}
+		
 		for (let i = 0; i < this.players.length; i++) {
-			this.T.addPlayer(this.players[i]);
 			// on initialise la variable contenant notre joueur (le client)
 			if (this.players[i].id == window.localStorage.getItem('id')) {
+				this.players[i].isControlled = true;
 				this.clientPlayer = this.players[i];
+				this.indiceMe = i;
 			}
+			this.T.addPlayer(this.players[i]);
 		}
+		
 	},
 
 	// Initialise les joueurs en utilisant la liste des joueurs d'un autre client. Utilisée en cas de déconnexion du client en pleine partie
@@ -62,6 +76,7 @@ jeu = {
 			// on initialise la variable contenant notre joueur (le client)
 			if (this.players[i].id == window.localStorage.getItem('id')) {
 				this.clientPlayer = this.players[i];
+				this.indiceMe = i;
 			}
 		}
 	},
@@ -71,7 +86,7 @@ jeu = {
 		for (let i = 0; i < this.players.length; i++) {
 			if (this.players[i].isAlive) {
 				//Si c'est un bot
-				if (this.players[i].isBot) {
+				if (this.players[i].isBot && this.indiceMe ==0) {
 					this.players[i].choixDirection();
 					//Si c'est le joueur
 				}
@@ -91,6 +106,7 @@ jeu = {
 			updateChrono();
 			this.testVictoire();
 		}
+		ui.displayResultView(this.result);
 		deleteTerrain();
 	},
 
@@ -107,13 +123,12 @@ jeu = {
 			console.log("Jeu terminé");
 			//Cas d'égalité
 			if (nbPlayersAlive == 0) {
-				console.log("Egalité !");
 				let message = {
 					type: "gameOver",
 					gameId: window.localStorage.getItem('gameId')
 				}
 				ws.send(JSON.stringify(message));
-				ui.displayResultView("Egalité")
+				//this.result = "egalite"
 			}
 			// en cas de victoire du client, on envoie un message au serveur pour qu'il mette a jour le vainqueur dans la bd
 			if (this.clientPlayer.isAlive) {
@@ -123,7 +138,7 @@ jeu = {
 					gameId: window.localStorage.getItem('gameId')
 				}
 				ws.send(JSON.stringify(message));
-				ui.displayResultView("Victoire !")
+				this.result = "victoire"
 			}
 			window.localStorage.removeItem('gameId'); //pourra etre utile en cas de fermeture du client et tentative de reconnexion a la partie
 		}
@@ -151,23 +166,40 @@ document.addEventListener("keydown", function (event) {
 	//changement de direction
 	if (event.keyCode === 38 && jeu.clientPlayer.direction != "S") { // Up arrow key
 		jeu.clientPlayer.setDirection("N");
+		updateArrow("N");
 	} else if (event.keyCode === 40) { // Down arrow key
 		console.log("test");
 		jeu.clientPlayer.setDirection("S");
+		updateArrow("S");
 	} else if (event.keyCode === 37) { // Left arrow key
 		console.log("test");
 		jeu.clientPlayer.setDirection("O");
+		updateArrow("O");
 	} else if (event.keyCode === 39) { // Right arrow key
 		console.log("test");
 		jeu.clientPlayer.setDirection("E");
+		updateArrow("E");
 	}
 	else return;
 	//notification au serveur du changement de direction
+	sendMessage("move", jeu.clientPlayer.direction, window.localStorage.getItem('id'),jeu.clientPlayer.color,window.localStorage.getItem('gameId'))
+
+});
+
+// Direction du joueur sur les boutons de l'écran
+function pressDirection(dir){
+	jeu.players[jeu.indiceMe].setDirection(dir);
+	updateArrow(dir);
+	sendMessage("move", dir, window.localStorage.getItem('id'),jeu.clientPlayer.color,window.localStorage.getItem('gameId'));
+}
+
+function sendMessage(type, direction, playerId, color, gameId){
 	let message = {
-		type: "move",
-		direction: jeu.clientPlayer.direction,
-		playerId: window.localStorage.getItem('id'),
-		gameId: window.localStorage.getItem('gameId')
+		type: type,
+		direction: direction,
+		playerId: playerId,
+		color: color,
+		gameId: gameId
 	}
 	ws.send(JSON.stringify(message));
-});
+}

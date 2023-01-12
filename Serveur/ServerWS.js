@@ -58,7 +58,7 @@ wsServer.on('request', function (request) {
             // DEPLACEMENT D'UN JOUEUR
             case 'move':
                 //notifie touts les autres joueurs dans la game du changement de direction
-                games.move(clientMessageData.playerId, clientMessageData.direction, clientMessageData.gameId);
+                games.move(clientMessageData.color, clientMessageData.direction, clientMessageData.gameId);
                 break;
 
             // VICTOIRE D'UN JOUEUR
