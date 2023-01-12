@@ -39,7 +39,7 @@ body {
 
 /* Portrait layout (default) */
 .app {
-    background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
+    /*background:url(../img/logo.png) no-repeat center top;*/ /* 170px x 200px */
     position:absolute;             /* position in the center of the screen */
     left:50%;
     top:50%;
@@ -108,3 +108,125 @@ h1 {
         background-image:linear-gradient(to bottom, #585858 0%, #1B1B1B 51%);
     }
 }
+
+#mainMenuView{
+    display: none;
+}
+
+#gameView{
+    display: none;
+}
+
+#lobbyView{
+    display: none;
+}
+
+#leaderboardView{
+    display: none;
+}
+
+#resultView{
+    display: none;
+}
+#vueJeu{
+	display: none;
+  	flex-direction: column;
+  	justify-content: space-around;
+    max-width: 100%;
+}
+
+.header{
+  background-color: grey;
+  overflow: hidden;
+  height: 10vh;
+  margin: 0px;
+  padding: 0px;
+  box-shadow: 3px 3px 15px 2px black;
+
+  font-size: 1.1em;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header #title{
+	color: white;
+}
+
+
+.div_terrain{
+	width: 100%;
+	height: 80vh;
+	background-color: white;
+
+	display: flex;
+  	flex-direction: column;
+  	justify-content: center;
+  	align-items: center;
+}
+
+#terrain{
+	width: 100vw;
+	height: 100vw;
+	background-color: ghostwhite;
+	/*border: 1px solid black;*/
+	display: flex;
+  	flex-direction: column;
+  	justify-content: center;
+}
+
+#terrain table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+#terrain td{
+	height: 3vw;
+	width: 3vw;
+	/*border: 1px solid lightgrey;*/
+	margin: 0;
+	padding: 0;
+}
+
+.wall{
+	background-color: black;
+}
+
+
+.playerBlue{
+	background-color: blue;
+}
+.playerRed{
+	background-color: red;
+}
+.playerYellow{
+	background-color: orange;
+}
+.playerGreen{
+	background-color: green;
+}
+
+.blue{
+	background-color: lightblue;
+}
+.red{
+	background-color: palevioletred;
+}
+.yellow{
+	background-color: yellow;
+}
+.green{
+	background-color: lightgreen;
+}
+
+
+
+
+.footer{
+	width: 100%;
+	text-align: center;
+}
+
+
