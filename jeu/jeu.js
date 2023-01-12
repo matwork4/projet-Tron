@@ -57,21 +57,6 @@ function avancePlayers(){
 	}
 }
 
-document.addEventListener("keydown", function(event) {
-    if (event.keyCode === 38 && players[0].direction != "S") { // Up arrow key
-      players[0].setDirection("N");
-    } else if (event.keyCode === 40) { // Down arrow key
-		console.log("test");
-		players[0].setDirection("S");
-    } else if (event.keyCode === 37) { // Left arrow key
-		console.log("test");
-		players[0].setDirection("O");
-    } else if (event.keyCode === 39) { // Right arrow key
-		console.log("test");
-		players[0].setDirection("E");
-    }
-  });
-
 
 // Direction du joueur au clavier
 document.addEventListener("keydown", function(event) {
