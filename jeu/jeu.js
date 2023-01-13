@@ -43,7 +43,11 @@ function avancePlayers(){
 
 			//Si c'est un bot
 			if(players[i].isBot){
-				players[i].choixDirection();
+				try{
+					players[i].choixDirection();
+				}catch(error){
+					console.log("Erreor wall player "+players[i].color);
+				}
 			//Si c'est le joueur
 			}else if(players[i].isControlled){
 				/* ICI 
