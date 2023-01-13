@@ -191,14 +191,14 @@ body
 #vueConnexion .links a:hover, 
 #vueConnexion .links a:nth-child(2)
 {
-	color: #45f3ff;
+	color: var(--tron-color);
 }
 #vueConnexion input[type="submit"]
 {
 	border: none;
 	outline: none;
 	padding: 11px 25px;
-	background: #45f3ff;
+	background: var(--tron-color);
 	cursor: pointer;
 	border-radius: 4px;
 	font-weight: 600;
