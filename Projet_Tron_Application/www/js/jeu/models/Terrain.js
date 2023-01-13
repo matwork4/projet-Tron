@@ -92,7 +92,7 @@ Terrain = {
 		}
 		P.idBlock = newB.id;
 
-	}
+	},
 
 	//Place une tnt sur une case libre
 	placeTnt(){
@@ -109,7 +109,7 @@ Terrain = {
 				 */
 			}
 		}
-	}
+	},
 
 	//Explose la tnt : détruit les murs et le terrain
 	explosion(b){
@@ -143,7 +143,7 @@ Terrain = {
 				}
 			}
 		}
-	}
+	},
 
 	//supprime les murs et les tnt du rayon
 	boom(b){

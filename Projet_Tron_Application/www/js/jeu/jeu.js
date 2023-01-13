@@ -103,12 +103,10 @@ jeu = {
 		console.log("start")
 		while (this.run) {
 			this.avancePlayers();
-			/*
 			//Fait apparaitre de la tnt chez un le joueur 1
 			if(this.indiceMe == 0){
-				T.placeTnt(); 
+				//this.T.placeTnt(); //décommenter pour tester la tnt
 			}
-			*/
 			updateTerrain();
 			await sleep(this.sleepDuration);
 			updateChrono();
