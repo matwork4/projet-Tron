@@ -92,6 +92,12 @@ function updateTerrain(){
 						col.setAttribute('class', "green");
 					}
 				}
+
+				if(T.tab[i][j].isTnt){
+					col = document.getElementById("block"+T.tab[i][j].id);
+					col.setAttribute('class', "tnt");
+				}
+
 			}
 		}
 }
@@ -160,7 +166,7 @@ function clickBlock(id){
 // **************************
 
 hideAll();
-seek("vueConnexion");
+seek("vueJeu");
 
 function hideAll(){
 	var elem1 = document.getElementById("vueConnexion");

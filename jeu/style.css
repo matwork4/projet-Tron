@@ -485,6 +485,19 @@ body
 	background-color: lightgreen;
 	box-shadow: 1px 1px 10px 2px lightgreen;
 }
+.tnt{
+	background-image: url("./assets/tnt.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	box-shadow: 1px 1px 10px 5px orangered;
+}
+.explosion{
+	background-image: url("./assets/dirt.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
 
 #vueJeu #info_couleur{
 	/*font-weight: bold;*/

@@ -1,5 +1,5 @@
 const dimX = 70, dimY = 70;
-const sleepDuration = 40;
+const sleepDuration = 50;
 var run = true;
 var chrono = 0;
 var nbPlayers = 4; //nombre de joueurs max
@@ -96,6 +96,7 @@ displayTerrain();
 async function start(){
 	while(run){
 		avancePlayers();
+		T.placeTnt();
 		updateTerrain();
 		await sleep(sleepDuration);
 		updateChrono();

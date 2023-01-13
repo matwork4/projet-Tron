@@ -6,6 +6,8 @@ class Block{
 		this.color = 0; //0: vide, 1: bleu, 2: rouge, 3: jaune, 4: vert
 		this.isWall = false;
 		this.isPlayer = false;
+		this.isTnt = false;
+		this.isExplosion = false;
 	}
 
 	setWall(){
@@ -21,6 +23,10 @@ class Block{
 	removePlayer(){
 		this.isPlayer = false;
 		this.isWall = true;
+	}
+
+	setTnt(){
+		this.isTnt = true;
 	}
 
 
