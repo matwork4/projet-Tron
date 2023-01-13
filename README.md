@@ -9,7 +9,7 @@
 mkdir data\db
 # Ajouter platform android
 Projet_Tron_Application\cordova platform add android
-#la compilation et à l'assemblage de projet
+# la compilation et à l'assemblage de projet
 Projet_Tron_Application\cordova build android  
 # mongo daemon à lancer depuis un terminal dédié :
 mongod --dbpath data\db
