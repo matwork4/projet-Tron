@@ -38,8 +38,6 @@ authentication = {
             });
             user.save()
         }    
-        //regarder si le joueur est dans une game ? auquel cas amener le joueur directement sur la vue
-        // du jeu au lieu du menu principal ?
         this.result.feedback = "success"
         this.result.id = user.id
         return JSON.stringify(this.result);
