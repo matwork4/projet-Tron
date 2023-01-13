@@ -1,5 +1,5 @@
 jeu = {
-	sleepDuration: 100,
+	sleepDuration: 50,
 	run: true,
 	chrono: 0,
 	startingPositions: [354, 406, 4287, 4339],
@@ -103,6 +103,12 @@ jeu = {
 		console.log("start")
 		while (this.run) {
 			this.avancePlayers();
+			/*
+			//Fait apparaitre de la tnt chez un le joueur 1
+			if(this.indiceMe == 0){
+				T.placeTnt(); 
+			}
+			*/
 			updateTerrain();
 			await sleep(this.sleepDuration);
 			updateChrono();

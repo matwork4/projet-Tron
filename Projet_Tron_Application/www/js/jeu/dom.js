@@ -92,6 +92,11 @@ function updateTerrain(){
 					col.setAttribute('class', "green");
 				}
 			}
+
+			if(jeu.T.tab[i][j].isTnt){
+				col = document.getElementById("block"+jeu.T.tab[i][j].id);
+				col.setAttribute('class', "tnt");
+			}
 		}
 	}
 }

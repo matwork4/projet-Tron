@@ -39,7 +39,27 @@ class Player{
 	choixDirection(){
 		
 		let bonChoix = true;
+		let isTnt = 'none';
 		let b = jeu.T.getBlockByID(this.idBlock);
+
+		//On vérifie si une case autour de lui est une tnt 
+		if(jeu.T.getBlockByID((this.idBlock)-(jeu.T.dimY-1)).isTnt){
+			isTnt = 'N';
+		}else if(jeu.T.getBlockByID((this.idBlock)+(jeu.T.dimY-1)).isTnt){
+			isTnt = 'S';
+		}else if(jeu.T.getBlockByID((this.idBlock)+1).isTnt){
+			isTnt = 'E';
+		}else if(jeu.T.getBlockByID((this.idBlock)-1).isTnt){
+			isTnt = 'O';
+		}
+
+		if(isTnt != 'none'){
+			console.log("bot explose tnt !");
+			this.direction = isTnt;
+			//ajouter le message au serveur
+			sendMessage("move", this.direction, this.id, this.color, window.localStorage.getItem('gameId'));
+			return;
+		}
 
 		//On vérifie si la case devant lui est un mur
 		if(this.direction == 'N'  

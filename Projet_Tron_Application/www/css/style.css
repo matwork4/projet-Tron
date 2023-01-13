@@ -491,6 +491,14 @@ body {
 	box-shadow: 1px 1px 10px 2px lightgreen;
 }
 
+.tnt{
+    background-image: url("../img/tnt.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 1px 1px 10px 5px orangered;
+}
+
 #vueJeu #info_couleur {
     /*font-weight: bold;*/
     letter-spacing: 0.1em;
