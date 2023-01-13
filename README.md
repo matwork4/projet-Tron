@@ -7,9 +7,10 @@
 
 #### CREATION BASE DE DONNEES ###
 mkdir data\db
-# Ajouter platform android et construire le projet
+# Ajouter platform android
 Projet_Tron_Application\cordova platform add android
-Projet_Tron_Application\cordova build android
+#la compilation et à l'assemblage de projet
+Projet_Tron_Application\cordova build android  
 # mongo daemon à lancer depuis un terminal dédié :
 mongod --dbpath data\db
 # Pour seeder, il faut lancer depuis un nouveau terminal:
