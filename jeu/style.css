@@ -450,19 +450,22 @@ body
 
 .playerBlue{
 	background-color: blue;
-	border-radius: 1px;
+	border-radius: 3px;
 	box-shadow: 0px 0px 2px 5px blue;
 }
 .playerRed{
 	background-color: darkred;
+	border-radius: 3px;
 	box-shadow: 0px 0px 2px 5px darkred;
 }
 .playerYellow{
 	background-color: orange;
+	border-radius: 3px;
 	box-shadow: 0px 0px 2px 5px orange;
 }
 .playerGreen{
 	background-color: green;
+	border-radius: 3px;
 	box-shadow: 0px 0px 2px 5px green;
 }
 
