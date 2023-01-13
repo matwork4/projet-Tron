@@ -34,18 +34,22 @@ class Player{
 		let bonChoix = true;
 		let b = T.getBlockByID(this.idBlock);
 
-		//On vérifie si la case devant lui est un mur
-		if(this.direction == 'N'  
-			&& (T.getBlockByID((this.idBlock)-(dimY-1)).isWall || T.getBlockByID((this.idBlock)-(dimY*2)).isWall )){
+		//On vérifie si la case devant lui ou la case N+2 est un mur
+		if(this.direction == 'N' && T.getBlockByID((this.idBlock)-(dimY-1)).isWall){
 			bonChoix = false;
-		}else if(this.direction == 'S' 
-			&& (T.getBlockByID((this.idBlock)+(dimY-1)).isWall || T.getBlockByID((this.idBlock)+(dimY*2)).isWall )){
+		}else if(this.direction == 'N' && T.getBlockByID((this.idBlock)-(dimY*2)).isWall){
 			bonChoix = false;
-		}else if(this.direction == 'E' 
-			&& (T.getBlockByID((this.idBlock)+1).isWall || T.getBlockByID((this.idBlock)+2).isWall )){
+		}else if(this.direction == 'S' && T.getBlockByID((this.idBlock)+(dimY-1)).isWall){
 			bonChoix = false;
-		}else if(this.direction == 'O' 
-			&& (T.getBlockByID((this.idBlock)-1).isWall || T.getBlockByID((this.idBlock)-2).isWall )){
+		}else if(this.direction == 'S' && T.getBlockByID((this.idBlock)+(dimY*2)).isWall ){
+			bonChoix = false;
+		}else if(this.direction == 'E' && T.getBlockByID((this.idBlock)+1).isWall){
+			bonChoix = false;
+		}else if(this.direction == 'E' && T.getBlockByID((this.idBlock)+2).isWall){
+			bonChoix = false;
+		}else if(this.direction == 'O' && T.getBlockByID((this.idBlock)-1).isWall){
+			bonChoix = false;
+		}else if(this.direction == 'O' && T.getBlockByID((this.idBlock)-2).isWall){
 			bonChoix = false;
 		}
 
