@@ -1,6 +1,7 @@
 /* Fonctions qui modifient le DOM html
 */
 
+// affiche le terrain dans le DOM
 function displayTerrain(){
 	let terrain = document.createElement("table");
 	terrain.setAttribute('id',"childTerrain");
@@ -49,9 +50,53 @@ function displayTerrain(){
 		document.getElementById("terrain").appendChild(terrain);
 }
 
+// supprime le terrain dans le DOM
 function deleteTerrain(){
 	document.getElementById("childTerrain").remove();
 }
+
+// met a jour les classes du terrain
+function updateTerrain(){
+
+	let col;
+
+	for(let i=0; i<dimY-1; i++){
+			for(let j=0; j<dimX-1; j++){
+				
+				if(T.tab[i][j].isPlayer){
+					if(T.tab[i][j].color == 1){
+						col = document.getElementById("block"+T.tab[i][j].id);
+						col.setAttribute('class', "playerBlue");
+					}else if(T.tab[i][j].color == 2){
+						col = document.getElementById("block"+T.tab[i][j].id);
+						col.setAttribute('class', "playerRed");
+					}else if(T.tab[i][j].color == 3){
+						col = document.getElementById("block"+T.tab[i][j].id);
+						col.setAttribute('class', "playerYellow");
+					}else if(T.tab[i][j].color == 4){
+						col = document.getElementById("block"+T.tab[i][j].id);
+						col.setAttribute('class', "playerGreen");
+					}
+				}else{
+					if(T.tab[i][j].color == 1){
+						col = document.getElementById("block"+T.tab[i][j].id);
+						col.setAttribute('class', "blue");
+					}else if(T.tab[i][j].color == 2){
+						col = document.getElementById("block"+T.tab[i][j].id);
+						col.setAttribute('class', "red");
+					}else if(T.tab[i][j].color == 3){
+						col = document.getElementById("block"+T.tab[i][j].id);
+						col.setAttribute('class', "yellow");
+					}else if(T.tab[i][j].color == 4){
+						col = document.getElementById("block"+T.tab[i][j].id);
+						col.setAttribute('class', "green");
+					}
+				}
+			}
+		}
+}
+
+
 
 function updateChrono(){
 	chrono+=sleepDuration+49; //on estime à 49ms le temps d'exécution de chaque boucle
@@ -105,13 +150,17 @@ function updateInfoCouleur(col){
 
 }
 
+function clickBlock(id){
+	console.log("Click on block id "+id);
+}
+
 
 // **************************
 // Hide'N Seek functions
 // **************************
 
 hideAll();
-seek("vueConnexion");
+seek("vueJeu");
 
 function hideAll(){
 	var elem1 = document.getElementById("vueConnexion");

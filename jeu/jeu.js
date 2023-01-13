@@ -1,5 +1,5 @@
-const dimX = 34, dimY = 34;
-const sleepDuration = 65;
+const dimX = 70, dimY = 70;
+const sleepDuration = 40;
 var run = true;
 var chrono = 0;
 var nbPlayers = 4; //nombre de joueurs max
@@ -19,10 +19,10 @@ updateInfoCouleur(indiceMe);
 function initPlayers(){
 	//sa couleur, l'id du bloc, sa direction, si on le controle, si c'est un bot
 
-	players.push(new Player(1,103,"S", false, false)); 
-	players.push(new Player(2,129,"O", false, false));
-	players.push(new Player(3,961,"E", false, false));
-	players.push(new Player(4,987,"N", false, false));
+	players.push(new Player(1,354,"S", false, false)); 
+	players.push(new Player(2,406,"O", false, false));
+	players.push(new Player(3,4287,"E", false, false));
+	players.push(new Player(4,4339,"N", false, false));
 
 	for(let i=0; i<nbPlayers; i++){
 		if(playersFromLobby[i] == "me"){
@@ -92,8 +92,7 @@ displayTerrain();
 async function start(){
 	while(run){
 		avancePlayers();
-		deleteTerrain();
-		displayTerrain();
+		updateTerrain();
 		await sleep(sleepDuration);
 		updateChrono();
 		testVictoire();

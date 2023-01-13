@@ -35,19 +35,23 @@ class Player{
 		let b = T.getBlockByID(this.idBlock);
 
 		//On vérifie si la case devant lui est un mur
-		if(this.direction == 'N' && T.getBlockByID((this.idBlock)-(dimY-1)).isWall){
+		if(this.direction == 'N'  
+			&& (T.getBlockByID((this.idBlock)-(dimY-1)).isWall || T.getBlockByID((this.idBlock)-(dimY*2)).isWall )){
 			bonChoix = false;
-		}else if(this.direction == 'S' && T.getBlockByID((this.idBlock)+(dimY-1)).isWall){
+		}else if(this.direction == 'S' 
+			&& (T.getBlockByID((this.idBlock)+(dimY-1)).isWall || T.getBlockByID((this.idBlock)+(dimY*2)).isWall )){
 			bonChoix = false;
-		}else if(this.direction == 'E' && T.getBlockByID((this.idBlock)+1).isWall){
+		}else if(this.direction == 'E' 
+			&& (T.getBlockByID((this.idBlock)+1).isWall || T.getBlockByID((this.idBlock)+2).isWall )){
 			bonChoix = false;
-		}else if(this.direction == 'O' && T.getBlockByID((this.idBlock)-1).isWall){
+		}else if(this.direction == 'O' 
+			&& (T.getBlockByID((this.idBlock)-1).isWall || T.getBlockByID((this.idBlock)-2).isWall )){
 			bonChoix = false;
 		}
 
 		//Si c'est un mur, on change de direction
 		//Sinon il y a quand même une petite chance de tourner
-		if(bonChoix == false || getRandomInt(60) == 0){
+		if(bonChoix == false || getRandomInt(100) == 0){
 			//On ajoute les choix possibles dans un tableau
 			bonChoix = [];
 			if(T.getBlockByID((this.idBlock)-(dimY-1)).isWall == false){

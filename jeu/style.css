@@ -394,8 +394,8 @@ body
 
 #vueJeu .box{
 	position: relative;
-	width: 460px;
-	height: 460px;
+	width: 480px;
+	height: 485px;
 	background: var(--black-color);
 	border-radius: 8px;
 	overflow: hidden;
@@ -405,7 +405,7 @@ body
   justify-content: center;
   align-items: center;
 
-  margin: 30px;
+  margin: 20px;
 }
 
 
@@ -437,8 +437,8 @@ body
 }
 
 #vueJeu #terrain td{
-	height: 14px;
-	width: 14px;
+	height: 7px;
+	width: 7px;
 	/*border: 1px solid lightgrey;*/
 	margin: 0;
 	padding: 0;
@@ -450,32 +450,37 @@ body
 
 .playerBlue{
 	background-color: blue;
+	border-radius: 1px;
+	box-shadow: 0px 0px 2px 5px blue;
 }
 .playerRed{
 	background-color: darkred;
+	box-shadow: 0px 0px 2px 5px darkred;
 }
 .playerYellow{
 	background-color: orange;
+	box-shadow: 0px 0px 2px 5px orange;
 }
 .playerGreen{
 	background-color: green;
+	box-shadow: 0px 0px 2px 5px green;
 }
 
 .blue{
 	background-color: var(--tron-color);
-	box-shadow: 2px 2px 10px 1px var(--tron-color);
+	box-shadow: 1px 1px 10px 2px var(--tron-color);
 }
 .red{
 	background-color: red;
-	box-shadow: 2px 2px 10px 1px red;
+	box-shadow: 1px 1px 10px 2px red;
 }
 .yellow{
 	background-color: yellow;
-	box-shadow: 2px 2px 10px 1px yellow;
+	box-shadow: 1px 1px 10px 2px yellow;
 }
 .green{
 	background-color: lightgreen;
-	box-shadow: 2px 2px 10px 1px lightgreen;
+	box-shadow: 1px 1px 10px 2px lightgreen;
 }
 
 #vueJeu #info_couleur{
