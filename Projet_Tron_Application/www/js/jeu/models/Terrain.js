@@ -82,7 +82,7 @@ Terrain = {
 		P.lifeTime++;
 		if (P.die(newB)){
 			// le joueur a perdu
-			jeu.result="defaite";
+			jeu.result="Defeat";
 		}
 		P.idBlock = newB.id;
 

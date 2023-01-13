@@ -6,18 +6,28 @@ var Game = require('./Game');
 lobby = {
     queue : [], // File d'attente des joueurs. Contient les websockets pour chaque joueur 
     minimumPlayersNumber : 2,
-    dimensionTerrain : 34,
+    dimensionTerrain : 70,
     ids : [], //contient les ids de chaque joueur
 
     // Gere une demande de connection d'un client à un lobby
     async handle(connection, id){
-        // On ajoute le joueur à la file d'attente
-        this.queue.push(connection);
-        this.ids.push(id);
+
         let message = {
             type : "lobby",
             isLobbyFull : false
         }
+        //joueur deja dans le lobby
+        /*
+        if(this.ids.includes(id)){
+            console.log("joueur deja connecte");
+            connection.send(JSON.stringify(message));
+            return ;
+        }
+        */
+        // On ajoute le joueur à la file d'attente
+        this.queue.push(connection);
+        this.ids.push(id);
+
         // Si le lobby est plein :
         if (this.queue.length == this.minimumPlayersNumber){
             //on cré une game dans la bd

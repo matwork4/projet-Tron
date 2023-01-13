@@ -1,13 +1,13 @@
 jeu = {
-	sleepDuration: 250,
+	sleepDuration: 100,
 	run: true,
 	chrono: 0,
-	startingPositions: [103, 129, 961, 987],
+	startingPositions: [354, 406, 4287, 4339],
 	startingDirections: ["S", "O", "E", "N"],
 	players: [],
 	nbPlayers: 4, //nombre de joueurs max
 	indiceMe: null, //quel joueur on est (commence à 0)
-	result:"egalite",
+	result:"Draw game", // resultat affiché. Sera écrasé en cas de victoire d'un joueur
 
 	/* Initialise le terrain et la liste des joueurs à partir de : 
 	-@dim : la dimension du terrain
@@ -87,8 +87,11 @@ jeu = {
 			if (this.players[i].isAlive) {
 				//Si c'est un bot
 				if (this.players[i].isBot && this.indiceMe ==0) {
-					this.players[i].choixDirection();
-					//Si c'est le joueur
+					try{
+						this.players[i].choixDirection();
+					}catch(error){
+						console.log("Erreor wall player "+this.players[i].color);
+					}
 				}
 				//Avance le joueur
 				this.T.avancePlayer(this.players[i]);
@@ -100,14 +103,13 @@ jeu = {
 		console.log("start")
 		while (this.run) {
 			this.avancePlayers();
-			deleteTerrain();
-			displayTerrain();
+			updateTerrain();
 			await sleep(this.sleepDuration);
 			updateChrono();
 			this.testVictoire();
 		}
-		//ui.displayResultView(this.result);
-		seek("vueEcranFin");
+		ui.displayResultView(this.result);
+		//seek("vueEcranFin");
 		deleteTerrain();
 	},
 
@@ -139,7 +141,7 @@ jeu = {
 					gameId: window.localStorage.getItem('gameId')
 				}
 				ws.send(JSON.stringify(message));
-				this.result = "victoire"
+				this.result = "Victory"
 			}
 			window.localStorage.removeItem('gameId'); //pourra etre utile en cas de fermeture du client et tentative de reconnexion a la partie
 		}

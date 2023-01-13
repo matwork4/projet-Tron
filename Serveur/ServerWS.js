@@ -38,7 +38,7 @@ wsServer.on('request', function (request) {
         let clientMessageData = JSON.parse(clientMessage.utf8Data);
         //réponse eventuelle du serveur
         let message = {}
-
+        console.log("type message recu:"+clientMessageData.type)
         // Switch selon le type du message envoyé par le client (tentative de login, deplacement de la moto...)
         switch (clientMessageData.type) {
             // TENTATIVE DE LOGIN
@@ -84,6 +84,7 @@ wsServer.on('request', function (request) {
 
             // UN JOUEUR VEUT REVENIR DANS UNE PARTIE APRES DECONNEXION
             case "returnToGame":
+                console.log("return to game")
                 // on récupère l'objet qui contient les connexions aux autre joueurs de la partie
                 let game = games[clientMessageData.gameId]
                 if (game != undefined && !game.isOver) {
@@ -105,6 +106,7 @@ wsServer.on('request', function (request) {
 
             // UN CLIENT A ENVOYE L'ETAT DE SON JEU
             case "sendGame":
+                console.log("send game")
                 message = {
                     type: "sendGame",
                     grille: clientMessageData.grille,

@@ -35,6 +35,7 @@ ws.onopen = function () {
         gameId : gameId,
         playerId : window.localStorage.getItem('id')
     }
+    console.log("tentative de reconnection")
     ws.send(JSON.stringify(message));
 };
 
@@ -76,6 +77,7 @@ ws.onmessage = function (e) {
 
         // LE SERVEUR A ENVOYE L'ETAT DE JEU D'UN AUTRE JOUEUR DE LA PARTIE
         case "sendGame":
+            console.log("send game")
             ui.displayGameView();
             //redémarrage de la partie grace aux données d'un autre client transmises par le serveur
             jeu.initFromOtherPlayer(serverMessage.grille, serverMessage.players);
@@ -84,12 +86,19 @@ ws.onmessage = function (e) {
 
         // LE SERVEUR DEMANDE L'ETAT DE LA PARTIE
         case "askGame":
+            console.log("ask game");
             let message = {
                 type : 'sendGame',
                 grille : jeu.T.tab,
                 players : jeu.players
-            }
+            };
             ws.send(JSON.stringify(message));
+
+            //TESTS
+            console.log("mtype du message envoye:"+message.type)
+            ws.send("")
+            ///////
+
             break;
 
         // LE SERVEUR A ENVOYE LES MEILLEURS SCORES

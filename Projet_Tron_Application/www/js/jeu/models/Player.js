@@ -42,19 +42,23 @@ class Player{
 		let b = jeu.T.getBlockByID(this.idBlock);
 
 		//On vérifie si la case devant lui est un mur
-		if(this.direction == 'N' && jeu.T.getBlockByID((this.idBlock)-(jeu.T.dimY-1)).isWall){
+		if(this.direction == 'N'  
+			&& (jeu.T.getBlockByID((this.idBlock)-(jeu.T.dimY-1)).isWall || jeu.T.getBlockByID((this.idBlock)-(jeu.T.dimY*2)).isWall )){
 			bonChoix = false;
-		}else if(this.direction == 'S' && jeu.T.getBlockByID((this.idBlock)+(jeu.T.dimY-1)).isWall){
+		}else if(this.direction == 'S' 
+			&& (jeu.T.getBlockByID((this.idBlock)+(jeu.T.dimY-1)).isWall || jeu.T.getBlockByID((this.idBlock)+(jeu.T.dimY*2)).isWall )){
 			bonChoix = false;
-		}else if(this.direction == 'E' && jeu.T.getBlockByID((this.idBlock)+1).isWall){
+		}else if(this.direction == 'E' 
+			&& (jeu.T.getBlockByID((this.idBlock)+1).isWall || jeu.T.getBlockByID((this.idBlock)+2).isWall )){
 			bonChoix = false;
-		}else if(this.direction == 'O' && jeu.T.getBlockByID((this.idBlock)-1).isWall){
+		}else if(this.direction == 'O' 
+			&& (jeu.T.getBlockByID((this.idBlock)-1).isWall || jeu.T.getBlockByID((this.idBlock)-2).isWall )){
 			bonChoix = false;
 		}
 
 		//Si c'est un mur, on change de direction
 		//Sinon il y a quand même une petite chance de tourner
-		if(bonChoix == false || getRandomInt(60) == 0){
+		if(bonChoix == false || getRandomInt(100) == 0){
 			//On ajoute les choix possibles dans un tableau
 			bonChoix = [];
 			if(jeu.T.getBlockByID((this.idBlock)-(jeu.T.dimY-1)).isWall == false){
@@ -74,7 +78,7 @@ class Player{
 			if(bonChoix.length > 0){
 				let random = getRandomInt(bonChoix.length);
 				this.direction = bonChoix[random];
-				console.log("Bot "+this.id+" turn "+this.direction);
+				//console.log("Bot "+this.id+" turn "+this.direction);
 				sendMessage("move", this.direction, this.id, this.color, window.localStorage.getItem('gameId'));
 			}else{
 				console.log("Rip Bot "+this.id);

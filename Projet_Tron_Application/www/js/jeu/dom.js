@@ -1,6 +1,7 @@
 /* Fonctions qui modifient le DOM html
 */
 
+// affiche le terrain dans le DOM
 function displayTerrain(){
 	let terrain = document.createElement("table");
 	terrain.setAttribute('id',"childTerrain");
@@ -49,8 +50,50 @@ function displayTerrain(){
 		document.getElementById("terrain").appendChild(terrain);
 }
 
+//Supprime le terrain
 function deleteTerrain(){
 	document.getElementById("childTerrain").remove();
+}
+
+// met a jour les classes du terrain
+function updateTerrain(){
+
+	let col;
+
+	for(let i=0; i<jeu.T.dimY-1; i++){
+		for(let j=0; j<jeu.T.dimX-1; j++){
+
+			if(jeu.T.tab[i][j].isPlayer){
+				if(jeu.T.tab[i][j].color == 1){
+					col = document.getElementById("block"+jeu.T.tab[i][j].id);
+					col.setAttribute('class', "playerBlue");
+				}else if(jeu.T.tab[i][j].color == 2){
+					col = document.getElementById("block"+jeu.T.tab[i][j].id);
+					col.setAttribute('class', "playerRed");
+				}else if(jeu.T.tab[i][j].color == 3){
+					col = document.getElementById("block"+jeu.T.tab[i][j].id);
+					col.setAttribute('class', "playerYellow");
+				}else if(jeu.T.tab[i][j].color == 4){
+					col = document.getElementById("block"+jeu.T.tab[i][j].id);
+					col.setAttribute('class', "playerGreen");
+				}
+			}else{
+				if(jeu.T.tab[i][j].color == 1){
+					col = document.getElementById("block"+jeu.T.tab[i][j].id);
+					col.setAttribute('class', "blue");
+				}else if(jeu.T.tab[i][j].color == 2){
+					col = document.getElementById("block"+jeu.T.tab[i][j].id);
+					col.setAttribute('class', "red");
+				}else if(jeu.T.tab[i][j].color == 3){
+					col = document.getElementById("block"+jeu.T.tab[i][j].id);
+					col.setAttribute('class', "yellow");
+				}else if(jeu.T.tab[i][j].color == 4){
+					col = document.getElementById("block"+jeu.T.tab[i][j].id);
+					col.setAttribute('class', "green");
+				}
+			}
+		}
+	}
 }
 
 function updateChrono(){
@@ -103,6 +146,11 @@ function updateInfoCouleur(col){
 	}
 
 }
+
+function clickBlock(id){
+	console.log("Click on block id "+id);
+}
+
 
 // **************************
 // Hide'N Seek functions
