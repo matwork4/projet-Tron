@@ -7,6 +7,10 @@
 
 #### CREATION BASE DE DONNEES ###
 mkdir data\db
+# Ajouter Websocket
+npm install websocket
+# Ajouter mongoose
+npm install mongoose 
 # mongo daemon à lancer depuis un terminal dédié :
 mongod --dbpath data\db
 # Pour seeder, il faut lancer depuis un nouveau terminal:
@@ -19,8 +23,9 @@ node data\seed.js
 mongod --dbpath data\db
 # Lancer le serveur depuis un terminal dédié : 
 node Serveur\ServerWS.js
-# Lancer le jeu dans firefox depuis un terminal dédié :
+# Déplacez-vous dans le répertoire racine de projet
 cd Projet_Tron_Application
+# Lancer le jeu dans firefox depuis un terminal dédié :
 cordova run browser --target=firefox
 # Lancer le jeu dans chrome depuis un terminal dédié :
 cd Projet_Tron_Application
