@@ -160,7 +160,7 @@ function clickBlock(id){
 // **************************
 
 hideAll();
-seek("vueJeu");
+seek("vueConnexion");
 
 function hideAll(){
 	var elem1 = document.getElementById("vueConnexion");
