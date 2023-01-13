@@ -17,13 +17,13 @@ lobby = {
             isLobbyFull : false
         }
         //joueur deja dans le lobby
-        /*
+        
         if(this.ids.includes(id)){
             console.log("joueur deja connecte");
             connection.send(JSON.stringify(message));
             return ;
         }
-        */
+        
         // On ajoute le joueur à la file d'attente
         this.queue.push(connection);
         this.ids.push(id);
