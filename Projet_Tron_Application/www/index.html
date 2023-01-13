@@ -33,60 +33,78 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
         <meta name="color-scheme" content="light dark">
-        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/style.css">
         <title>Hello World</title>
     </head>
     <body>
         <div class="app">
-
-            <!-- Ce qui était créé automatiquement par cordova -->
-            <!-- <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <div>
-                    <h1><button onclick="envoyer()"></button></h1>
-                </div>
-                <p class="event received">Device is Ready</p>
-            </div> -->
-
-            <!-- Header -->
-            <!-- <div class="header">
+            <div class="header">
                 <div id="title">Tron</div>
-            </div> -->
-            
-            <!-- Page de connexion -->
-            <div id="connectionView">
-                <form>
-                    <label>Username:</label>
-                    <input type="text" name="username" id="usernameInput">
-                    <label>Password:</label>
-                    <input type="text" name="password" id="passwordInput">
-
-                    <input type="button" value="Login" id="loginButton"/>
-                </form>
             </div>
-
-            <!-- Page du menu principal -->
-            <div id="mainMenuView">
-                Main menu view
-                <button class="joinLobbyButton">Rejoindre le lobby</button>
-                <button id="leaderboardButton">Meilleurs scores</button>
+            <div id="vueConnexion">
+                <div class="box">
+                    <form autocomplete="off">
+                        <h2>Sign in</h2>
+                        <div class="inputBox">
+                            <input id="usernameInput" type="text" required="required">
+                            <span>Username</span>
+                            <i></i>
+                        </div>
+                        <div class="inputBox">
+                            <input id="passwordInput" type="password" required="required">
+                            <span>Password</span>
+                            <i></i>
+                        </div>
+                        <!--
+                        <div class="links">
+                            <a href="#">Forgot Password ?</a>
+                            <a href="#">Signup</a>
+                        </div>-->
+                        <input id="loginButton" value="Login">
+                    </form>
+                </div>
             </div>
-
-            <!-- Page du leaderboard -->
-            <div id="leaderboardView">
-                Meilleurs scores
-                <div id="score"></div>
-                <button class="menuButton">Menu principal</button>
+            <div id="vueMenu">
+                <div class="box">
+                    <div id="inside">
+                        <h2>Menu</h2>
+                        <button class="joinLobbyButton">Join Lobby</button>
+                        <button id="leaderboardButton">Leaderboard</button>
+                        <button id="logOutButton"onclick="seek('vueConnexion')">Log out</button>
+                    </div>
+                </div>
             </div>
-
-            <!-- Page du lobby -->
-            <div id="lobbyView">
-                Lobby view
+            <div id="vueLobby">
+                <div class="box">
+                    <div id="inside">
+                        <p onclick="seek('vueJeu')">Waiting for players ...</p>
+                        <button onclick="seek('vueMenu')">Back to Menu</button>
+                    </div>
+                </div>
+        
             </div>
-            
-            <!-- Page du jeu -->
+            <div id="vueScores">
+                <div class="box">
+                    <div id="inside">
+                        <h2>Leaderboard</h2>
+                        <div id="scores">
+                        </div>
+                        <button onclick="seek('vueMenu')">Back to Menu</button>
+                    </div>
+                </div>
+            </div>
+            <div id="vueEcranFin">
+                <div class="box">
+                    <div id="inside">
+                        <h2>Winner</h2>
+                        <p id="winner">bobby_lasticot</p>
+                        <button class="joinLobbyButton">Play again</button>
+                        <button onclick="seek('vueMenu')">Back to Menu</button>
+                    </div>
+                </div>
+            </div>
             <div id="vueJeu">
-                <div class="div_terrain">
+                <div class="box">
                     <div id="terrain">
                     </div>
                 </div>
@@ -109,25 +127,16 @@
                             <td></td>
                         </tr>
                     </table>
+                    <button id="btn_start" onclick="start()">Start</button>
                     <p id="chrono">Temps = 0.00 s</p>
-
                 </div>
             </div>
-
-            <!-- Page du résultat de la partie -->
-            <div id="resultView">
-                <div id="result"></div>
-                <button class="joinLobbyButton">Jouer une nouvelle partie</button>
-                <button class="menuButton">Menu principal</button>
-            </div>
-
         </div>
         <script src="js/ui.js"></script>
         <script src="js/event_listeners.js"></script>
         <script type="text/javascript" src="js/jeu/models/Player.js"></script>
         <script type="text/javascript" src="js/jeu/models/Block.js"></script>
         <script type="text/javascript" src="js/jeu/models/Terrain.js"></script>
-        <script type="text/javascript" src="js/jeu/models/Game.js"></script>
         <script type="text/javascript" src="js/jeu/dom.js"></script>
         <script type="text/javascript" src="js/jeu/jeu.js"></script>
         <script src="js/index.js"></script>

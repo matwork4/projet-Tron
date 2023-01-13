@@ -1,5 +1,5 @@
 jeu = {
-	sleepDuration: 100,
+	sleepDuration: 250,
 	run: true,
 	chrono: 0,
 	startingPositions: [103, 129, 961, 987],
@@ -106,7 +106,8 @@ jeu = {
 			updateChrono();
 			this.testVictoire();
 		}
-		ui.displayResultView(this.result);
+		//ui.displayResultView(this.result);
+		seek("vueEcranFin");
 		deleteTerrain();
 	},
 

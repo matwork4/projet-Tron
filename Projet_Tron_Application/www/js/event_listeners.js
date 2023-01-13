@@ -1,4 +1,3 @@
-
 // Event Listener sur le bouton pour se login
 document.getElementById('loginButton').addEventListener('click', function(event){
     let message = {
@@ -13,6 +12,7 @@ document.getElementById('loginButton').addEventListener('click', function(event)
 lobbyButtons = document.getElementsByClassName('joinLobbyButton');
 for(let i = 0; i < lobbyButtons.length; i++) {
     lobbyButtons[i].addEventListener("click", function() {
+        console.log("join lobby button");
         let message = {
             type : 'joinLobby',
             username : document.getElementById('usernameInput').value,

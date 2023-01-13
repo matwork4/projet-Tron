@@ -72,13 +72,13 @@ function updateArrow(dir){
 	droite.style.boxShadow = "";
 
 	if(dir == "N"){
-		haut.style.boxShadow = "2px 2px 10px 2px black";
+		haut.style.boxShadow = "2px 2px 10px 2px #45f3ff";
 	}else if(dir == "S"){
-		bas.style.boxShadow = "2px 2px 10px 2px black";
+		bas.style.boxShadow = "2px 2px 10px 2px #45f3ff";
 	}else if(dir == "E"){
-		droite.style.boxShadow = "2px 2px 10px 2px black";
+		droite.style.boxShadow = "2px 2px 10px 2px #45f3ff";
 	}else if(dir == "O"){
-		gauche.style.boxShadow = "2px 2px 10px 2px black";
+		gauche.style.boxShadow = "2px 2px 10px 2px #45f3ff";
 	}
 }
 
@@ -89,22 +89,45 @@ function updateInfoCouleur(col){
 	var elem = document.getElementById("info_couleur");
 
 	if(col==0){
-		elem.innerHTML = "Vous êtes Bleu";
-		elem.style.color = "blue";
+		elem.innerHTML = "You are Blue";
+		elem.style.color = "#45f3ff";
 	}else if(col==1){
-		elem.innerHTML = "Vous êtes Rouge";
+		elem.innerHTML = "You are Red";
 		elem.style.color = "red";
 	}else if(col==2){
-		elem.innerHTML = "Vous êtes Jaune";
-		elem.style.color = "orange";
+		elem.innerHTML = "You are Yellow";
+		elem.style.color = "yellow";
 	}else if(col==3){
-		elem.innerHTML = "Vous êtes Vert";
-		elem.style.color = "green";
+		elem.innerHTML = "You are Green";
+		elem.style.color = "lightgreen";
 	}
 
 }
 
+// **************************
+// Hide'N Seek functions
+// **************************
 
+//hideAll();
+//seek("vueConnexion");
 
+function hideAll(){
+	var elem1 = document.getElementById("vueConnexion");
+	var elem2 = document.getElementById("vueMenu");
+	var elem3 = document.getElementById("vueLobby");
+	var elem4 = document.getElementById("vueScores");
+	var elem5 = document.getElementById("vueEcranFin");
+	var elem6 = document.getElementById("vueJeu");
+	elem1.style.display = "none";
+	elem2.style.display = "none";
+	elem3.style.display = "none";
+	elem4.style.display = "none";
+	elem5.style.display = "none";
+	elem6.style.display = "none";
+}
 
-
+function seek(vue){
+	hideAll();
+	var elem = document.getElementById(vue);
+	elem.style.display = "";
+}
