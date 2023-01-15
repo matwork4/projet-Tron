@@ -1,5 +1,5 @@
 const dimX = 70, dimY = 70;
-const sleepDuration = 50;
+const sleepDuration = 40;
 var run = true;
 var chrono = 0;
 var nbPlayers = 4; //nombre de joueurs max
